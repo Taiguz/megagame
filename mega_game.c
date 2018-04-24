@@ -1,10 +1,11 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<locale.h>
-#include<string.h>
-#include<math.h>
-#include<time.h>
-#include"megalib.h"
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <locale.h>
+#include <string.h>
+#include <math.h>
+#include <time.h>
+#include "megalib.h"
 
 // Atribuindo à struct seu respectivo vetor.
 
@@ -16,6 +17,11 @@ MENU menus[10];
 
 CARTA cartas[10];
 
+TEMP_CARTA temp_mesa_jogador[5];
+
+TEMP_CARTA temp_mesa_inimigo[5];
+
+
 INIMIGO inimigos[10];
 
 
@@ -23,11 +29,15 @@ INIMIGO inimigos[10];
 
 int i, j, entrada;
 
-int mesa_aliada[4];
+int mesa_aliada[5];
 
-int mesa_inimiga[4];
+int mesa_inimiga[5];
 
-int mao_jogador[4];
+int vida[2];
+
+int mao_inimiga[5];
+
+int mao_jogador[5];
 
 int deck_jogador[40];
 
@@ -36,6 +46,8 @@ int count;
 int comand;
 
 char cmd[50];
+
+
 
 // Criando função "main()", a estrutura principal do jogo.
 
@@ -55,47 +67,58 @@ int main(int argc, char const *argv[]) {
 
 	entrada = 1;
 
+
+
+	int menu;
+
+	menu = 0;
+
+
+
 	CriarCartas(cartas);
 
 	CriarTelas(telas);
 
 	CriarHUD(hud);
 
+
+
+
+
 	//Executa enquanto estiver nas telas antes do jogo
 	while (entrada) {
 
 		TransicaoTela(tela_num, &tela_anterior, &tela_criar, telas);
 
-		scanf( "%s", &cmd);
+		scanf( "%s", cmd);
 
-		comand = Comando(cmd);
+		comand = Comando(cmd, &atgame);
 
 		MudarTela(comand, &tela_num, &atgame, &entrada);
 
 	}
+
+	//Inicia as variáveis do jogo
+	IniciarJogo(mesa_aliada, mesa_inimiga, mao_jogador,mao_inimiga, vida, temp_mesa_jogador, temp_mesa_inimigo, cartas);
+
 	//Executa enquanto estiver em jogo
 	while (atgame) {
 
-		int game_ini;
 
-		int menu;
 
-		menu = 0;
 
-		game_ini = 0;
+		DesenharMesa(mesa_aliada, mesa_inimiga, mao_jogador, cartas, hud, temp_mesa_jogador,temp_mesa_inimigo);
 
-		IniciarJogo(&game_ini, mesa_aliada, mesa_inimiga, mao_jogador);
+		scanf("%s", cmd);
 
-		DesenharMesa(mesa_aliada, mesa_inimiga, mao_jogador, cartas, hud);
+		comand = Comando(cmd, &atgame);
 
-		scanf("%s", &cmd);
-
-		comand = Comando(cmd);
-
-		MudarHud(comand, hud, cartas, &atgame, &menu, mao_jogador);
+		Controle(comand, hud, cartas, &atgame, &menu, mao_jogador, mesa_aliada, mesa_inimiga, temp_mesa_jogador,temp_mesa_inimigo,vida);
 
 	}
 
+
 	return 0;
 }
+
 
