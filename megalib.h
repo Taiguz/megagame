@@ -81,8 +81,8 @@ typedef struct {
 
 // Definindo os Headers das funções
 int Comando(char*,int*);
-void DesenharMesa(int*, int*, int*, CARTA*, HUD*, TEMP_CARTA*,TEMP_CARTA*);
-void DesenharMenu(int, HUD*, CARTA*, int*, int*, int*, int*);
+void DesenharMesa(int*, int*, int*, CARTA*, HUD*, TEMP_CARTA*,TEMP_CARTA*,int*);
+void DesenharMenu(int, HUD*, CARTA*, int*, int*, int*, int*, TEMP_CARTA*);
 void DesenharTela(int, TELA*);
 void CriarHUD(HUD*);
 void CriarCartas(CARTA*);
