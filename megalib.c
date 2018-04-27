@@ -3,9 +3,9 @@
 #include <string.h>
 #include <math.h>
 #include "megalib.h"
-
 #define HUD_INICIO 26
 #define HUD_FIM 34
+
 // Criando função responsável por receber comandos "in-game" (digitados no console).
 int Comando(char *copy, int *atgame) {
 
@@ -136,32 +136,46 @@ void CriarHUD(HUD *hud) {
 	strcpy(hud->linhas[35].linha, "+----------------------+");
 	hud++;
 	strcpy(hud->linhas[0].linha, "                                                    +---------+                                                   ");
-	strcpy(hud->linhas[1].linha, "+---------------------------------------------------+ SUA MÃO +--------------------------------------------------+");
+	strcpy(hud->linhas[1].linha, "+---------------------------------------------------+ SUA MÃO +----------------------------------------------+");
 	strcpy(hud->linhas[2].linha, "                                                    +---------+                                                   ");
+
+	hud ++;
+
+	strcpy(hud->linhas[0].linha, "   +-------+");
+	strcpy(hud->linhas[1].linha, "   | VOCE  |");
+	strcpy(hud->linhas[2].linha, "+--+-------+-+");
+	strcpy(hud->linhas[3].linha, "|    8000    |");
+	strcpy(hud->linhas[4].linha, "+------------+");
+	strcpy(hud->linhas[5].linha, "              ");
+	strcpy(hud->linhas[6].linha, " +---------+");
+	strcpy(hud->linhas[7].linha, " | INIMIGO |");
+	strcpy(hud->linhas[8].linha, "++---------++");
+	strcpy(hud->linhas[9].linha, "|   8000    |");
+	strcpy(hud->linhas[10].linha, "+-----------+");
 }
 //Função que irá criar todas as cartas do jogo.
 void CriarCartas(CARTA *cartas) {
 
 
 
-	strcpy(cartas->linhas[0].linha, "+--------------------+");
-	strcpy(cartas->linhas[1].linha, "|                    |");
-	strcpy(cartas->linhas[2].linha, "|                    |");
-	strcpy(cartas->linhas[3].linha, "|                    |");
-	strcpy(cartas->linhas[4].linha, "|                    |");
-	strcpy(cartas->linhas[5].linha, "|                    |");
-	strcpy(cartas->linhas[6].linha, "|                    |");
-	strcpy(cartas->linhas[7].linha, "|                    |");
-	strcpy(cartas->linhas[8].linha, "|                    |");
-	strcpy(cartas->linhas[9].linha, "|                    |");
-	strcpy(cartas->linhas[10].linha, "|                    |");
-	strcpy(cartas->linhas[11].linha, "|                    |");
-	strcpy(cartas->linhas[12].linha, "|                    |");
-	strcpy(cartas->linhas[13].linha, "|                    |");
-	strcpy(cartas->linhas[14].linha, "|                    |");
-	strcpy(cartas->linhas[15].linha, "|                    |");
-	strcpy(cartas->linhas[16].linha, "|                    |");
-	strcpy(cartas->linhas[17].linha, "+--------------------+");
+	strcpy(cartas->linhas[0].linha, "+-------------------+");
+	strcpy(cartas->linhas[1].linha, "|                   |");
+	strcpy(cartas->linhas[2].linha, "|                   |");
+	strcpy(cartas->linhas[3].linha, "|                   |");
+	strcpy(cartas->linhas[4].linha, "|                   |");
+	strcpy(cartas->linhas[5].linha, "|                   |");
+	strcpy(cartas->linhas[6].linha, "|                   |");
+	strcpy(cartas->linhas[7].linha, "|                   |");
+	strcpy(cartas->linhas[8].linha, "|                   |");
+	strcpy(cartas->linhas[9].linha, "|                   |");
+	strcpy(cartas->linhas[10].linha, "|                   |");
+	strcpy(cartas->linhas[11].linha, "|                   |");
+	strcpy(cartas->linhas[12].linha, "|                   |");
+	strcpy(cartas->linhas[13].linha, "|                   |");
+	strcpy(cartas->linhas[14].linha, "|                   |");
+	strcpy(cartas->linhas[15].linha, "|                   |");
+	strcpy(cartas->linhas[16].linha, "|                   |");
+	strcpy(cartas->linhas[17].linha, "+-------------------+");
 	cartas++;
 
 	cartas->tipo = 1;
@@ -185,7 +199,7 @@ void CriarCartas(CARTA *cartas) {
 	strcpy(cartas->linhas[13].linha, "|**************X    |");
 	strcpy(cartas->linhas[14].linha, "|**************X    |");
 	strcpy(cartas->linhas[15].linha, "+-------------------+");
-	strcpy(cartas->linhas[16].linha, "|ATK:3000 |DEF:1500 |");
+	strcpy(cartas->linhas[16].linha, "| ATK:3000| DEF:1500|");
 	strcpy(cartas->linhas[17].linha, "+-------------------+");
 	strcpy(cartas->nome_menu[0].linha, "|# - Satella           |");
 
@@ -213,7 +227,7 @@ void CriarCartas(CARTA *cartas) {
 	strcpy(cartas->linhas[13].linha, "|((((( (((|))) )))))|");
 	strcpy(cartas->linhas[14].linha, "|((((  (((|)))  ))))|");
 	strcpy(cartas->linhas[15].linha, "+---------+---------+");
-	strcpy(cartas->linhas[16].linha, "|ATK:3200 |DEF:1300 |");
+	strcpy(cartas->linhas[16].linha, "| ATK:3200| DEF:1300|");
 	strcpy(cartas->linhas[17].linha, "+---------+---------+");
 
 	strcpy(cartas->nome_menu[0].linha, "|# - MindStealer       |");
@@ -230,7 +244,7 @@ void CriarCartas(CARTA *cartas) {
 	strcpy(cartas->linhas[3].linha, "|  @@@@@       /\\   |");
 	strcpy(cartas->linhas[4].linha, "| @@@@@@@      ||   |");
 	strcpy(cartas->linhas[5].linha, "|@@@@@ V|      ||   |");
-	strcpy(cartas->linhas[6].linha, "|@@@@@   \\    ||    |");
+	strcpy(cartas->linhas[6].linha, "|@@@@@   \\     ||   |");
 	strcpy(cartas->linhas[7].linha, "|@@@@@  _|     ||   |");
 	strcpy(cartas->linhas[8].linha, "|@@@@/__/      ||   |");
 	strcpy(cartas->linhas[9].linha, "|@@@XXXXXX     ||   |");
@@ -240,7 +254,7 @@ void CriarCartas(CARTA *cartas) {
 	strcpy(cartas->linhas[13].linha, "|XXXXXXXX XXXXX^^   |");
 	strcpy(cartas->linhas[14].linha, "|XXXXXXXX XXXXX^^   |");
 	strcpy(cartas->linhas[15].linha, "+---------+---------+");
-	strcpy(cartas->linhas[16].linha, "|ATK:4100 | DEF:1900|");
+	strcpy(cartas->linhas[16].linha, "| ATK:4100| DEF:1900|");
 	strcpy(cartas->linhas[17].linha, "+---------+---------+");
 
 	strcpy(cartas->nome_menu[0].linha, "|# - Rhaegon           |");
@@ -267,7 +281,7 @@ void CriarCartas(CARTA *cartas) {
 	strcpy(cartas->linhas[13].linha, "|    XXXX    XXXX   |");
 	strcpy(cartas->linhas[14].linha, "|    XXXX    XXXX   |");
 	strcpy(cartas->linhas[15].linha, "+---------+---------+");
-	strcpy(cartas->linhas[16].linha, "|ATK:3200 | DEF:1300|");
+	strcpy(cartas->linhas[16].linha, "| ATK:3200| DEF:1300|");
 	strcpy(cartas->linhas[17].linha, "+---------+---------+");
 
 	strcpy(cartas->nome_menu[0].linha, "|# - Kyra              |");
@@ -295,14 +309,14 @@ void CriarCartas(CARTA *cartas) {
 	strcpy(cartas->linhas[13].linha, "|  HH  XXXXX @@XXXX |");
 	strcpy(cartas->linhas[14].linha, "|  HH  XXXXX @@XXXX |");
 	strcpy(cartas->linhas[15].linha, "+---------+---------+");
-	strcpy(cartas->linhas[16].linha, "|ATK:3900 | DEF:1000|");
+	strcpy(cartas->linhas[16].linha, "| ATK:3900| DEF:1000|");
 	strcpy(cartas->linhas[17].linha, "+---------+---------+");
 
 	strcpy(cartas->nome_menu[0].linha, "|# - Golyan            |");
 }
 // Função que cria as telas de início do jogo.
 void CriarTelas(TELA *telas) {
-
+// 109 largura 34 altura 
 
 	strcpy(telas->linhas[0].linha, "+--------------------------------------------------------------------------------------------------------+");
 	strcpy(telas->linhas[1].linha, "|                                                                                                        |");
@@ -384,12 +398,13 @@ void CriarInimigos(INIMIGO *inimigos) {
 	strcpy(inimigos->linhas[16].linha, "+------------------------+");
 }
 // Desenhando a Mesa do Jogo.
-void DesenharMesa(int *mesa_aliada, int *mesa_inimiga, int *mao_jogador, CARTA *cartas, HUD *hud, TEMP_CARTA *temp_mesa_jogador, TEMP_CARTA *temp_mesa_inimigo) {
+void DesenharMesa(int *mesa_aliada, int *mesa_inimiga, int *mao_jogador, CARTA *cartas, HUD *hud, TEMP_CARTA *temp_mesa_jogador, TEMP_CARTA *temp_mesa_inimigo, int *menu) {
 
 
 
 	int count_hud, i, j;
 	count_hud = 0;
+	int count_hud2 = 3;
 	i = 0;
 	j = 0;
 	// Inicio e fim das structs
@@ -489,6 +504,7 @@ void DesenharMesa(int *mesa_aliada, int *mesa_inimiga, int *mao_jogador, CARTA *
 	for (i = 0; i <= 3; i++) {
 
 		printf("%s\n", hud->linhas[i].linha);
+		//printf("%s\n", (hud + 1)->linhas[i].linha);
 	}
 	// Desenha mais 17 linhas para as cartas na mão do jogador
 	for (j = 0; j <= TAM_CARTA; j++) {
@@ -507,19 +523,48 @@ void DesenharMesa(int *mesa_aliada, int *mesa_inimiga, int *mao_jogador, CARTA *
 			cartas = cartas_inicio;
 		}
 		//mao_jogador = mao_jogador_inicio;
+		/*
+		if (count_hud2 <= 10) {
+			printf("%s", (hud + 1)->linhas[i + 5].linha );
+			count_hud2++;
 
+		}
+		*/
 		printf("\n");
 	}
+
+	for (i = 0; i < TAM_PADRAO; i++) {
+
+		printf("|%i| ", mesa_inimiga[i]);
+
+
+	}
+	printf("\n");
+	printf("MENU -> %i\n", *menu );
+	for (i = 0; i < TAM_PADRAO; i++) {
+
+		printf("|%i| ", mesa_aliada[i]);
+
+
+	}
+	printf("\n");
+
+
 	count_hud = 0 ;
 }
 // Função responsável por exibir as escolhas na HUD.
-void DesenharMenu(int escolha, HUD * hud, CARTA * cartas, int *mao_jogador, int *mesa_aliada, int *mesa_inimiga, int *menu) {
+void DesenharMenu(int escolha, HUD * hud, CARTA * cartas, int *mao_jogador, int *mesa_aliada, int *mesa_inimiga, int *menu, TEMP_CARTA *temp_carta) {
+
+	hud++;
+	int i;
+	char temp_nome[25];
+	LimparMenu(hud);
 
 	switch (escolha) {
 
 
 	case 0:
-		hud++;
+
 		strcpy(hud->linhas[26].linha, "|                      |");
 		strcpy(hud->linhas[27].linha, "|1 - Sumonar Carta     |");
 		strcpy(hud->linhas[28].linha, "|                      |");
@@ -533,20 +578,21 @@ void DesenharMenu(int escolha, HUD * hud, CARTA * cartas, int *mao_jogador, int 
 
 	case 1 :
 		//CARTA *cartas_inicio = cartas;
-		hud++;
-		int i;
-		LINHA temp_nome[5];
+
+
+
 		for (i = 0; i <= 4; i++) {
 
 			if (*(mao_jogador + i) != -1) {
+
 				//cartas += *mao_jogador;
 
-				strcpy(temp_nome[i].linha, (cartas + * (mao_jogador + i))->nome_menu[0].linha);
+				strcpy(temp_nome, (cartas + * (mao_jogador + i))->nome_menu[0].linha);
 
-				temp_nome[i].linha[1] = 49 + i ;
+				temp_nome[1] = 49 + i ;
 
 
-				strcpy(hud->linhas[26 + i].linha, temp_nome[i].linha);
+				strcpy(hud->linhas[26 + i].linha, temp_nome);
 
 			}
 
@@ -564,19 +610,19 @@ void DesenharMenu(int escolha, HUD * hud, CARTA * cartas, int *mao_jogador, int 
 
 	case 2:
 
-		hud++;
+
 		for (i = 0; i < TAM_PADRAO; i++) {
 
 			if (*(mesa_aliada + i) != -1) {
 
 				//cartas += *mesa_aliada;
 
-				strcpy(temp_nome[i].linha, (cartas + * (mesa_aliada + i))->nome_menu[0].linha);
+				strcpy(temp_nome, (cartas + * (mesa_aliada + i))->nome_menu[0].linha);
 
-				temp_nome[i].linha[1] = 49 + i ;
+				temp_nome[1] = 49 + i ;
 
 
-				strcpy(hud->linhas[26 + i].linha, temp_nome[i].linha);
+				strcpy(hud->linhas[26 + i].linha, temp_nome);
 			}
 			//cartas = cartas_inicio;
 
@@ -590,7 +636,7 @@ void DesenharMenu(int escolha, HUD * hud, CARTA * cartas, int *mao_jogador, int 
 		break;
 
 	case 3:
-		hud++;
+
 		strcpy(hud->linhas[26].linha, "|                      |");
 		strcpy(hud->linhas[27].linha, "|1 - Atacar            |");
 		strcpy(hud->linhas[28].linha, "|                      |");
@@ -605,19 +651,20 @@ void DesenharMenu(int escolha, HUD * hud, CARTA * cartas, int *mao_jogador, int 
 
 	case 4:
 
-		hud++;
 		for (i = 0; i < TAM_PADRAO; i++) {
 
 			if (*(mesa_aliada + i) != -1) {
 
 				//cartas += *mesa_aliada;
+				if (temp_carta[i].modo == 0) {
 
-				strcpy(temp_nome[i].linha, (cartas + * (mesa_aliada + i))->nome_menu[0].linha);
+					strcpy(temp_nome, (cartas + * (mesa_aliada + i))->nome_menu[0].linha);
 
-				temp_nome[i].linha[1] = 49 + i ;
+					temp_nome[1] = 49 + i ;
 
 
-				strcpy(hud->linhas[26 + i].linha, temp_nome[i].linha);
+					strcpy(hud->linhas[26 + i].linha, temp_nome);
+				}
 			}
 			//cartas = cartas_inicio;
 
@@ -629,36 +676,9 @@ void DesenharMenu(int escolha, HUD * hud, CARTA * cartas, int *mao_jogador, int 
 
 
 		break;
-	/*
-		case 4:
 
-			hud++;
-			for (i = 0; i < TAM_PADRAO; i++) {
-
-				if (*(mesa_inimiga + i) != -1) {
-
-					//cartas += *mesa_aliada;
-
-					strcpy(temp_nome[i].linha, (cartas + * (mesa_inimiga + i))->nome_menu[0].linha);
-
-					temp_nome[i].linha[1] = 49 + i ;
-
-
-					strcpy(hud->linhas[26 + i].linha, temp_nome[i].linha);
-				}
-				//cartas = cartas_inicio;
-
-
-			}
-			strcpy(hud->linhas[31].linha, "|                      |");
-			strcpy(hud->linhas[32].linha, "|6 - Voltar            |");
-
-
-
-			break;
-	*/
 	case 5:
-		hud++;
+
 		strcpy(hud->linhas[26].linha, "|                      |");
 		strcpy(hud->linhas[27].linha, "|1 - Modo de Ataque    |");
 		strcpy(hud->linhas[28].linha, "|                      |");
@@ -672,7 +692,7 @@ void DesenharMenu(int escolha, HUD * hud, CARTA * cartas, int *mao_jogador, int 
 		break;
 
 	case 6:
-		hud++;
+
 		strcpy(hud->linhas[26].linha, "|                      |");
 		strcpy(hud->linhas[27].linha, "|1 - Passar Vez        |");
 		strcpy(hud->linhas[28].linha, "|                      |");
@@ -687,19 +707,22 @@ void DesenharMenu(int escolha, HUD * hud, CARTA * cartas, int *mao_jogador, int 
 
 	case 7:
 
-		hud++;
+
 		for (i = 0; i < TAM_PADRAO; i++) {
 
 			if (*(mesa_aliada + i) != -1) {
 
 				//cartas += *mesa_aliada;
 
-				strcpy(temp_nome[i].linha, (cartas + * (mesa_aliada + i))->nome_menu[0].linha);
 
-				temp_nome[i].linha[1] = 49 + i ;
+				strcpy(temp_nome, (cartas + * (mesa_aliada + i))->nome_menu[0].linha);
+
+				temp_nome[1] = 49 + i ;
 
 
-				strcpy(hud->linhas[26 + i].linha, temp_nome[i].linha);
+				strcpy(hud->linhas[26 + i].linha, temp_nome);
+
+
 			}
 			//cartas = cartas_inicio;
 
@@ -713,21 +736,22 @@ void DesenharMenu(int escolha, HUD * hud, CARTA * cartas, int *mao_jogador, int 
 		break;
 	case 8:
 
-		hud++;
+
 		for (i = 0; i < TAM_PADRAO; i++) {
 
-			if (*(mesa_inimiga + i) != -1) {
-
-				//cartas += *mesa_aliada;
-
-				strcpy(temp_nome[i].linha, (cartas + * (mesa_inimiga + i))->nome_menu[0].linha);
-
-				temp_nome[i].linha[1] = 49 + i ;
 
 
-				strcpy(hud->linhas[26 + i].linha, temp_nome[i].linha);
+			if (mesa_inimiga[i] != -1) {
+
+
+				strcpy(temp_nome, (cartas + * (mesa_inimiga + i))->nome_menu[0].linha);
+
+				temp_nome[1] = 49 + i ;
+
+
+				strcpy(hud->linhas[26 + i].linha, temp_nome);
 			}
-			//cartas = cartas_inicio;
+
 
 
 		}
@@ -736,7 +760,6 @@ void DesenharMenu(int escolha, HUD * hud, CARTA * cartas, int *mao_jogador, int 
 		break;
 
 	}
-
 
 }
 // Função responsável por desenhar as telas do jogo.
@@ -751,6 +774,7 @@ void DesenharTela(int tel, TELA * telas) {
 		printf("%s\n", telas->linhas[i].linha);
 	}
 }
+// Função que limpa a tela do console do sistema.
 void LimparTela(int sistema) {
 
 	if (sistema) {
@@ -761,8 +785,6 @@ void LimparTela(int sistema) {
 		system("clear");
 
 	}
-
-
 }
 // Função responsável por limpar o menu da HUD.
 void LimparMenu(HUD * hud) {
@@ -883,8 +905,8 @@ void IniciarJogo(int *mesa_aliada, int *mesa_inimiga, int *mao_jogador, int *mao
 	mesa_aliada[3] = -1;
 	mesa_aliada[4] = -1;
 
-	mesa_inimiga[0] = 0;
-	mesa_inimiga[1] = -1;
+	mesa_inimiga[0] = 1;
+	mesa_inimiga[1] = 2;
 	mesa_inimiga[2] = -1;
 	mesa_inimiga[3] = -1;
 	mesa_inimiga[4] = -1;
@@ -893,7 +915,7 @@ void IniciarJogo(int *mesa_aliada, int *mesa_inimiga, int *mao_jogador, int *mao
 	mao_jogador[1] = 3;
 	mao_jogador[2] = 5;
 	mao_jogador[3] = 4;
-	mao_jogador[4] = 0;
+	mao_jogador[4] = 1;
 
 	mao_inimiga[0] = 2;
 	mao_inimiga[1] = 3;
@@ -959,9 +981,7 @@ void IniciarJogo(int *mesa_aliada, int *mesa_inimiga, int *mao_jogador, int *mao
 	vida[1] = 4000;
 
 }
-
-
-// Muda a hud de opçoes de acordo com os comandos do jogador
+// Muda a hud e os elementos do jogo de acordo com os comandos do jogador
 void Controle(int comand, HUD * hud, CARTA * cartas, int *atgame, int *menu, int *mao_jogador, int *mesa_aliada, int *mesa_inimiga, TEMP_CARTA *temp_mesa_jogador, TEMP_CARTA *temp_mesa_inimigo, int *vida) {
 
 	int i;
@@ -993,40 +1013,36 @@ void Controle(int comand, HUD * hud, CARTA * cartas, int *atgame, int *menu, int
 
 	}
 
-	if (mao_vazia != 5 && mesa_vazia != 5) {
-
-		*menu = 0;
-
-	}
-	else if (mao_vazia == 5 && mesa_vazia == 5) {
-
+	if (mao_vazia == 5 && mesa_vazia == 5) {
+		LimparMenu(hud);
+		DesenharMenu(6, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu, temp_mesa_jogador);
 		*menu = 6;
 
 	}
 	else if (mao_vazia == 5 && mesa_vazia != 5) {
+		LimparMenu(hud);
+		DesenharMenu(3, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu, temp_mesa_jogador);
 		*menu = 3;
-	}
-	else if ( mesa_vazia == 5 && mao_vazia != 5) {
-		*menu = 0;
 	}
 
 	switch (*menu) {
 
 
 	case 0:
+
 		switch (comand) {
 
 
 		case 1:
-
-			DesenharMenu(1, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu);
+			LimparMenu(hud);
+			DesenharMenu(1, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu, temp_mesa_jogador);
 			*menu = 1;
 
 			break;
 		case 2:
 
-
-			DesenharMenu(2, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu);
+			LimparMenu(hud);
+			DesenharMenu(2, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu, temp_mesa_jogador);
 			*menu = 2;
 
 			break;
@@ -1040,92 +1056,92 @@ void Controle(int comand, HUD * hud, CARTA * cartas, int *atgame, int *menu, int
 		break;
 
 	case 1:
-		switch (comand) {
 
-			switch (comand) {
-
-			case 1:
-
-				summon_escolha = comand;
-				DesenharMenu(5, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu);
-				*menu = 5;
-
-				break;
-
-			case 2:
-				summon_escolha = comand;
-				DesenharMenu(5, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu);
-				*menu = 5;
-				break;
-
-			case 3:
-				summon_escolha = comand;
-				DesenharMenu(5, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu);
-				*menu = 5;
-				break;
-
-			case 4:
-				summon_escolha = comand;
-				DesenharMenu(5, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu);
-				*menu = 5;
-				break;
-
-			case 5:
-				summon_escolha = comand;
-				DesenharMenu(5, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu);
-				*menu = 5;
-				break;
-
-			case 6:
-
-				LimparMenu(hud);
-				DesenharMenu(0, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu);
-				*menu = 0;
-				break;
-
-			}
-
-		}
-		break;
-
-	case 2:
 
 		switch (comand) {
 
 		case 1:
 
+			summon_escolha = comand;
+			DesenharMenu(5, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu, temp_mesa_jogador);
+			*menu = 5;
+
+			break;
+
+		case 2:
+			summon_escolha = comand;
+			DesenharMenu(5, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu, temp_mesa_jogador);
+			*menu = 5;
+			break;
+
+		case 3:
+			summon_escolha = comand;
+			DesenharMenu(5, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu, temp_mesa_jogador);
+			*menu = 5;
+			break;
+
+		case 4:
+			summon_escolha = comand;
+			DesenharMenu(5, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu, temp_mesa_jogador);
+			*menu = 5;
+			break;
+
+		case 5:
+			summon_escolha = comand;
+			DesenharMenu(5, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu, temp_mesa_jogador);
+			*menu = 5;
+			break;
+
+		case 6:
+
+			LimparMenu(hud);
+			DesenharMenu(0, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu, temp_mesa_jogador);
+			*menu = 0;
+			break;
+
+		}
+
+
+		break;
+
+	case 2:
+		switch (comand) {
+
+		case 1:
+
 			TrocarModo(comand, temp_mesa_jogador);
-			DesenharMenu(0, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu);
+			DesenharMenu(0, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu, temp_mesa_jogador);
 			*menu = 0;
 
 			break;
 
 		case 2:
 			TrocarModo(comand, temp_mesa_jogador);
-			DesenharMenu(0, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu);
+			DesenharMenu(0, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu, temp_mesa_jogador);
 			*menu = 0;
 			break;
 
 		case 3:
 			TrocarModo(comand, temp_mesa_jogador);
-			DesenharMenu(0, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu);
+			DesenharMenu(0, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu, temp_mesa_jogador);
 			*menu = 0;
 			break;
 
 		case 4:
 			TrocarModo(comand, temp_mesa_jogador);
-			DesenharMenu(0, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu);
+			DesenharMenu(0, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu, temp_mesa_jogador);
 			*menu = 0;
 			break;
 
 		case 5:
 			TrocarModo(comand, temp_mesa_jogador);
-			DesenharMenu(0, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu);
+			DesenharMenu(0, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu, temp_mesa_jogador);
 			*menu = 0;
 			break;
 
 		case 6:
-			DesenharMenu(0, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu);
+			LimparMenu(hud);
+			DesenharMenu(0, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu, temp_mesa_jogador);
 			*menu = 0;
 			break;
 
@@ -1138,19 +1154,23 @@ void Controle(int comand, HUD * hud, CARTA * cartas, int *atgame, int *menu, int
 
 
 		case 1:
-
-			DesenharMenu(4, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu);
+			LimparMenu(hud);
+			DesenharMenu(4, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu, temp_mesa_jogador);
 			*menu = 4;
 
 			break;
 		case 2:
-
-			DesenharMenu(7, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu);
+			LimparMenu(hud);
+			DesenharMenu(7, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu, temp_mesa_jogador);
 			*menu = 7;
 
 			break;
 		case 3 :
 			//Passar Vez
+			// passar vez
+			//AI();
+			DesenharMenu(0, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu, temp_mesa_jogador);
+			*menu = 0;
 			break;
 
 
@@ -1167,39 +1187,45 @@ void Controle(int comand, HUD * hud, CARTA * cartas, int *atgame, int *menu, int
 		case 1:
 
 			mesa_aliada_escolha = comand;
-			DesenharMenu(8, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu);
+			LimparMenu(hud);
+			DesenharMenu(8, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu, temp_mesa_jogador);
 			*menu = 8;
 
 			break;
 		case 2:
 
 			mesa_aliada_escolha = comand;
-			DesenharMenu(8, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu);
+			LimparMenu(hud);
+			DesenharMenu(8, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu, temp_mesa_jogador);
 			*menu = 8;
 
 			break;
 		case 3:
 
 			mesa_aliada_escolha = comand;
-			DesenharMenu(8, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu);
+			LimparMenu(hud);
+			DesenharMenu(8, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu, temp_mesa_jogador);
 			*menu = 8;
 			break;
 		case 4:
 
 			mesa_aliada_escolha = comand;
-			DesenharMenu(8, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu);
+			LimparMenu(hud);
+			DesenharMenu(8, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu, temp_mesa_jogador);
 			*menu = 8;
 			break;
 		case 5:
 
 			mesa_aliada_escolha = comand;
-			DesenharMenu(8, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu);
+			LimparMenu(hud);
+			DesenharMenu(8, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu, temp_mesa_jogador);
 			*menu = 8;
 			break;
 		case 6:
 
 			mesa_aliada_escolha = comand;
-			DesenharMenu(3, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu);
+			LimparMenu(hud);
+			DesenharMenu(3, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu, temp_mesa_jogador);
 			*menu = 3;
 			break;
 
@@ -1214,18 +1240,21 @@ void Controle(int comand, HUD * hud, CARTA * cartas, int *atgame, int *menu, int
 
 		case 1:
 			SumonarCarta(0, summon_escolha, mesa_aliada, mao_jogador, temp_mesa_jogador, cartas);
-			DesenharMenu(3, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu);
+			LimparMenu(hud);
+			DesenharMenu(3, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu, temp_mesa_jogador);
 			*menu = 3;
 			break;
 
 		case 2:
 			SumonarCarta(1, summon_escolha, mesa_aliada, mao_jogador, temp_mesa_jogador, cartas);
-			DesenharMenu(3, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu);
+			LimparMenu(hud);
+			DesenharMenu(3, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu, temp_mesa_jogador);
 			*menu = 3;
 			break;
 
 		case 3:
-			DesenharMenu(0, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu);
+			LimparMenu(hud);
+			DesenharMenu(0, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu, temp_mesa_jogador);
 			*menu = 0;
 			break;
 
@@ -1238,6 +1267,10 @@ void Controle(int comand, HUD * hud, CARTA * cartas, int *atgame, int *menu, int
 
 		case 1:
 			// passar vez
+			//AI();
+			LimparMenu(hud);
+			DesenharMenu(0, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu, temp_mesa_jogador);
+			*menu = 0;
 			break;
 
 		}
@@ -1251,37 +1284,43 @@ void Controle(int comand, HUD * hud, CARTA * cartas, int *atgame, int *menu, int
 		case 1:
 
 			TrocarModo(comand, temp_mesa_jogador);
-			DesenharMenu(3, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu);
+			LimparMenu(hud);
+			DesenharMenu(3, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu, temp_mesa_jogador);
 			*menu = 3;
 
 			break;
 
 		case 2:
 			TrocarModo(comand, temp_mesa_jogador);
-			DesenharMenu(3, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu);
+			LimparMenu(hud);
+			DesenharMenu(3, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu, temp_mesa_jogador);
 			*menu = 3;
 			break;
 
 		case 3:
 			TrocarModo(comand, temp_mesa_jogador);
-			DesenharMenu(3, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu);
+			LimparMenu(hud);
+			DesenharMenu(3, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu, temp_mesa_jogador);
 			*menu = 3;
 			break;
 
 		case 4:
 			TrocarModo(comand, temp_mesa_jogador);
-			DesenharMenu(3, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu);
+			LimparMenu(hud);
+			DesenharMenu(3, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu, temp_mesa_jogador);
 			*menu = 3;
 			break;
 
 		case 5:
 			TrocarModo(comand, temp_mesa_jogador);
-			DesenharMenu(3, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu);
+			LimparMenu(hud);
+			DesenharMenu(3, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu, temp_mesa_jogador);
 			*menu = 3;
 			break;
 
 		case 6:
-			DesenharMenu(3, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu);
+			LimparMenu(hud);
+			DesenharMenu(3, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu, temp_mesa_jogador);
 			*menu = 3;
 			break;
 
@@ -1319,12 +1358,12 @@ void Controle(int comand, HUD * hud, CARTA * cartas, int *atgame, int *menu, int
 			}
 			if (sum == sum_attack) {
 
-				DesenharMenu(6, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu);
+				DesenharMenu(6, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu, temp_mesa_jogador);
 				*menu = 6;
 
 			} else {
 
-				DesenharMenu(3, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu);
+				DesenharMenu(3, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu, temp_mesa_jogador);
 				*menu = 3;
 			}
 
@@ -1354,12 +1393,12 @@ void Controle(int comand, HUD * hud, CARTA * cartas, int *atgame, int *menu, int
 			}
 			if (sum == sum_attack) {
 
-				DesenharMenu(6, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu);
+				DesenharMenu(6, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu, temp_mesa_jogador);
 				*menu = 6;
 
 			} else {
 
-				DesenharMenu(3, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu);
+				DesenharMenu(3, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu, temp_mesa_jogador);
 				*menu = 3;
 			}
 
@@ -1388,12 +1427,12 @@ void Controle(int comand, HUD * hud, CARTA * cartas, int *atgame, int *menu, int
 			}
 			if (sum == sum_attack) {
 
-				DesenharMenu(6, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu);
+				DesenharMenu(6, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu, temp_mesa_jogador);
 				*menu = 6;
 
 			} else {
 
-				DesenharMenu(3, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu);
+				DesenharMenu(3, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu, temp_mesa_jogador);
 				*menu = 3;
 			}
 			break;
@@ -1421,12 +1460,12 @@ void Controle(int comand, HUD * hud, CARTA * cartas, int *atgame, int *menu, int
 			}
 			if (sum == sum_attack) {
 
-				DesenharMenu(6, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu);
+				DesenharMenu(6, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu, temp_mesa_jogador);
 				*menu = 6;
 
 			} else {
 
-				DesenharMenu(3, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu);
+				DesenharMenu(3, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu, temp_mesa_jogador);
 				*menu = 3;
 			}
 			break;
@@ -1454,12 +1493,12 @@ void Controle(int comand, HUD * hud, CARTA * cartas, int *atgame, int *menu, int
 			}
 			if (sum == sum_attack) {
 
-				DesenharMenu(6, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu);
+				DesenharMenu(6, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu, temp_mesa_jogador);
 				*menu = 6;
 
 			} else {
 
-				DesenharMenu(3, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu);
+				DesenharMenu(3, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu, temp_mesa_jogador);
 				*menu = 3;
 			}
 			break;
@@ -1487,12 +1526,12 @@ void Controle(int comand, HUD * hud, CARTA * cartas, int *atgame, int *menu, int
 			}
 			if (sum == sum_attack) {
 
-				DesenharMenu(6, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu);
+				DesenharMenu(6, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu, temp_mesa_jogador);
 				*menu = 6;
 
 			} else {
 
-				DesenharMenu(3, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu);
+				DesenharMenu(3, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu, temp_mesa_jogador);
 				*menu = 3;
 			}
 			break;
@@ -1503,325 +1542,8 @@ void Controle(int comand, HUD * hud, CARTA * cartas, int *atgame, int *menu, int
 	}
 
 }
-
-/*
-
-switch (*menu) {
-
-//Menu 0 - 1 Sumonar cartas, 2 - Trocas Modo, 3 - Passar Vez
-case 0:
-
-
-	switch (comand) {
-
-
-	case 1:
-		// Sumonar
-		LimparMenu(hud);
-		// Desenha menu que mostra as opções das cartas em mãos
-		DesenharMenu(1, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu);
-		// vai para o menu 1
-		*menu = 1;
-
-		break;
-	case 2:
-		// trocar modo
-		LimparMenu(hud);
-		DesenharMenu(2, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu);
-		*menu = 2;
-
-		break;
-	case 3 :
-		//Passar Vez
-		break;
-
-	case 55:
-
-		*atgame = 0;
-		break;
-
-
-	default:
-		printf("Comando inválido\n");
-		break;
-
-
-
-	}
-
-	break;
-// Menu 1 - Sumona a carta selecionada
-case 1:
-
-
-	switch (comand) {
-
-	case 1:
-		// Sumona a carta e vai para o menu 3
-
-	   summon_escolha = comand;
-		//SumonarCarta(mesa_aliada, mao_jogador, comand);
-		DesenharMenu(5, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu);
-		*menu = 5;
-		break;
-
-	case 2:
-		SumonarCarta(mesa_aliada, mao_jogador, comand);
-		DesenharMenu(3, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu);
-		*menu = 3;
-		break;
-
-	case 3:
-		SumonarCarta(mesa_aliada, mao_jogador, comand);
-		DesenharMenu(3, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu);
-		*menu = 3;
-		break;
-
-	case 4:
-		SumonarCarta(mesa_aliada, mao_jogador, comand);
-		DesenharMenu(3, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu);
-		*menu = 3;
-		break;
-
-	case 5:
-		SumonarCarta(mesa_aliada, mao_jogador, comand);
-		DesenharMenu(3, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu);
-		*menu = 3;
-		break;
-
-	case 6:
-
-		LimparMenu(hud);
-		DesenharMenu(0, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu);
-		*menu = 0;
-		break;
-	case 55:
-
-		*atgame = 0;
-		break;
-
-	}
-
-
-	break;
-
-case 2:
-	switch (comand) {
-
-	case 6:
-
-		LimparMenu(hud);
-		DesenharMenu(0, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu);
-		*menu = 0;
-		break;
-	case 55:
-
-		*atgame = 0;
-		break;
-
-	}
-
-	break;
-
-case 3:
-
-	switch (comand) {
-
-
-	case 1:
-		// Atacar uma carta inimiga
-
-		// Desenha menu que mostra as opções das cartas na mesa
-		DesenharMenu(2, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu);
-		// vai para o menu 1
-		*menu = 4;
-
-		break;
-	case 2:
-		// trocar modo
-		LimparMenu(hud);
-		DesenharMenu(2, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu);
-		*menu = 2;
-
-		break;
-	case 3 :
-		//Passar Vez
-		break;
-
-	case 55:
-
-		*atgame = 0;
-		break;
-
-
-	default:
-		printf("Comando inválido\n");
-		break;
-
-
-
-	}
-	break;
-
-case 4:
-	switch (comand) {
-
-	case 1:
-		mesa_aliada_escolha = comand;
-		DesenharMenu(2, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu);
-		// vai para o menu 1
-		*menu = 5;
-
-		break;
-	case 2:
-		mesa_aliada_escolha = comand;
-		DesenharMenu(4, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu);
-		// vai para o menu 1
-		*menu = 5;
-
-		break;
-	case 3:
-		mesa_aliada_escolha = comand;
-		DesenharMenu(4, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu);
-		// vai para o menu 1
-		*menu = 5;
-		break;
-	case 4:
-		mesa_aliada_escolha = comand;
-		DesenharMenu(4, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu);
-		// vai para o menu 1
-		*menu = 5;
-		break;
-	case 5:
-		mesa_aliada_escolha = comand;
-		DesenharMenu(4, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu);
-		// vai para o menu 1
-		*menu = 5;
-		break;
-	case 6:
-		mesa_aliada_escolha = comand;
-		DesenharMenu(4, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu);
-		// vai para o menu 1
-		*menu = 5;
-		break;
-	case 55:
-		*atgame = 0;
-		break;
-
-
-	}
-	break;
-
-case 5:
-	switch (comand) {
-
-	case 1:
-		mesa_inimiga_escolha = comand;
-
-		DesenharMenu(3, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu);
-		AtacarCarta(mesa_aliada_escolha, mesa_inimiga_escolha, mesa_aliada_status, mesa_aliada, mesa_inimiga, cartas);
-		// vai para o menu 1
-		*menu = 3;
-
-		break;
-	case 2:
-		mesa_inimiga_escolha = comand;
-		DesenharMenu(3, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu);
-		// vai para o menu 1
-		*menu = 3;
-
-		break;
-	case 3:
-		mesa_inimiga_escolha = comand;
-		DesenharMenu(3, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu);
-		// vai para o menu 1
-		*menu = 3;
-		break;
-	case 4:
-		mesa_inimiga_escolha = comand;
-		DesenharMenu(3, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu);
-		// vai para o menu 1
-		*menu = 3;
-		break;
-	case 5:
-		mesa_inimiga_escolha = comand;
-		DesenharMenu(3, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu);
-		// vai para o menu 1
-		*menu = 3;
-		break;
-	case 6:
-		mesa_inimiga_escolha = comand;
-		DesenharMenu(3, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu);
-		// vai para o menu 1
-		*menu = 3;
-		break;
-	case 55:
-		*atgame = 0;
-		break;
-
-
-	}
-	break;
-
-	case 6:
-
-
-	switch (comand) {
-
-	case 1:
-		// Sumona a carta e vai para o menu 3
-
-	   summon_escolha = comand;
-		//SumonarCarta(mesa_aliada, mao_jogador, comand);
-		DesenharMenu(5, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu);
-		*menu = 5;
-		break;
-
-	case 2:
-		SumonarCarta(mesa_aliada, mao_jogador, comand);
-		DesenharMenu(3, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu);
-		*menu = 3;
-		break;
-
-	case 3:
-		SumonarCarta(mesa_aliada, mao_jogador, comand);
-		DesenharMenu(3, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu);
-		*menu = 3;
-		break;
-
-	case 4:
-		SumonarCarta(mesa_aliada, mao_jogador, comand);
-		DesenharMenu(3, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu);
-		*menu = 3;
-		break;
-
-	case 5:
-		SumonarCarta(mesa_aliada, mao_jogador, comand);
-		DesenharMenu(3, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu);
-		*menu = 3;
-		break;
-
-	case 6:
-
-		LimparMenu(hud);
-		DesenharMenu(0, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu);
-		*menu = 0;
-		break;
-	case 55:
-
-		*atgame = 0;
-		break;
-
-	}
-
-	break;
-
-}
-*/
-
 // Coloca uma carta em campo e tira a mesma da mão do jogador
 void SumonarCarta(int modo, int indice, int *mesa, int *mao, TEMP_CARTA *temp_carta, CARTA *cartas) {
-// who =0 player, who =1 AI
 	int i;
 	int space = -1;
 
@@ -1859,7 +1581,7 @@ void SumonarCarta(int modo, int indice, int *mesa, int *mao, TEMP_CARTA *temp_ca
 
 	}
 }
-
+// Ataca uma carta inimiga com a carta aliada seleciona e retorna a vida perdida
 int AtacarCarta(int indice_1, int indice_2, TEMP_CARTA *temp_mesa_jogador, TEMP_CARTA *temp_mesa_inimigo, int *mesa_aliada, int *mesa_inimiga, int *vida) {
 
 
@@ -1911,13 +1633,13 @@ int AtacarCarta(int indice_1, int indice_2, TEMP_CARTA *temp_mesa_jogador, TEMP_
 			return diff;
 
 		}
-		else{
+		else {
 
 			return 0;
 		}
 
 
-	}else{
+	} else {
 
 
 		return 0;
@@ -1927,63 +1649,33 @@ int AtacarCarta(int indice_1, int indice_2, TEMP_CARTA *temp_mesa_jogador, TEMP_
 
 	//int dano_1 = (cartas + * (mesa_aliada + (indice_1 - 1)))->atk;
 	//int dano_2 = (cartas + * (mesa_inimiga + (indice_2 - 1)))->atk;
-
+// Troca o modo da carta enviada.
 }
-
 void TrocarModo(int comand, TEMP_CARTA *temp_mesa) {
-// who = 0 player , who =1 AI
+
 	int indice = comand - 1;
 
 	if (temp_mesa[indice].modo == 0) {
 
-		temp_mesa[indice].modo == 1;
+		temp_mesa[indice].modo = 1;
 
-		char copy[8];
 
-		int i;
+		temp_mesa[indice].inf.linha[1] = 32;
 
-		for (i = 0; i < 8; i++) {
-
-			copy[i] = temp_mesa[indice].inf.linha[12 + i];
-
-		}
-
-		strcpy(temp_mesa[indice].inf.linha[11], "*");
-
-		for (i = 0; i < 8; i++) {
-
-			temp_mesa[indice].inf.linha[12 + i] = copy[i];
-
-		}
+		temp_mesa[indice].inf.linha[11] = 42;
 
 
 	} else {
 
 
-		temp_mesa[indice].modo == 0;
+		temp_mesa[indice].modo = 0;
 
-		char copy[8];
 
-		int i;
 
-		for (i = 0; i < 8; i++) {
+		temp_mesa[indice].inf.linha[1] = 42;
 
-			copy[i] = temp_mesa[indice].inf.linha[1 + i];
+		temp_mesa[indice].inf.linha[11] = 32;
 
-		}
-
-		strcpy(temp_mesa[indice].inf.linha[0], "*");
-
-		for (i = 0; i < 8; i++) {
-
-			temp_mesa[indice].inf.linha[1 + i] = copy[i];
-
-		}
 
 	}
-
 }
-
-/*
-void Destruir() {}
-*/
