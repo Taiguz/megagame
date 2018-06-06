@@ -1,10 +1,10 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<locale.h>
-#include<string.h>
-#include<math.h>
-#include<time.h>
-#include"megalib.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <locale.h>
+#include <string.h>
+#include <math.h>
+#include <time.h>
+#include "megalib.h"
 
 // Atribuindo à struct seu respectivo vetor.
 
@@ -16,6 +16,11 @@ MENU menus[10];
 
 CARTA cartas[10];
 
+TEMP_CARTA temp_mesa_jogador[5];
+
+TEMP_CARTA temp_mesa_inimigo[5];
+
+
 INIMIGO inimigos[10];
 
 
@@ -23,11 +28,15 @@ INIMIGO inimigos[10];
 
 int i, j, entrada;
 
-int mesa_aliada[4];
+int mesa_aliada[5];
 
-int mesa_inimiga[4];
+int mesa_inimiga[5];
 
-int mao_jogador[4];
+int vida[2];
+
+int mao_inimiga[5];
+
+int mao_jogador[5];
 
 int deck_jogador[40];
 
@@ -37,15 +46,27 @@ int comand;
 
 char cmd[50];
 
+int tela_anterior;
+
+int tela_num;
+
+int tela_criar;
+
+int atgame;
+
+int menu;
+
+
+
 // Criando função "main()", a estrutura principal do jogo.
 
 int main(int argc, char const *argv[]) {
 
 	setlocale(LC_ALL, "PORTUGUESE");
 
-	int tela_anterior = -1;
+	// Atribuindo alguns valores iniciais
 
-	int tela_num, tela_criar, atgame;
+	tela_anterior = -1;
 
 	atgame = 0;
 
@@ -55,46 +76,53 @@ int main(int argc, char const *argv[]) {
 
 	entrada = 1;
 
+	menu = 0;
+
+	//Função que irá criar todas as cartas do jogo.
 	CriarCartas(cartas);
 
+	// Função que cria as telas pré do jogo.
 	CriarTelas(telas);
 
+	// Função que cria as HUDs (mostra as informações básicas relativas ao jogador na tela) do jogo.
 	CriarHUD(hud);
+
 
 	//Executa enquanto estiver nas telas antes do jogo
 	while (entrada) {
 
+		// Desenha a nova tela se a mesma tiver mudado
 		TransicaoTela(tela_num, &tela_anterior, &tela_criar, telas);
 
-		scanf( "%s", &cmd);
+		scanf( "%s", cmd);
 
-		comand = Comando(cmd);
+		// Pega a o valor em cmd e converte para um inteiro e atribui ao comand que será o comando do jogador
+		comand = Comando(cmd, &atgame);
 
+		// Muda as telas do jogo baseado nos comando dados pelo jogador
 		MudarTela(comand, &tela_num, &atgame, &entrada);
 
 	}
+
+	//Inicia as variáveis do jogo
+	IniciarJogo(mesa_aliada, mesa_inimiga, mao_jogador, mao_inimiga, vida, temp_mesa_jogador, temp_mesa_inimigo, cartas);
+
 	//Executa enquanto estiver em jogo
 	while (atgame) {
 
-		int game_ini;
+		// Desenhando a Mesa do Jogo.
+		DesenharMesa(mesa_aliada, mesa_inimiga, mao_jogador, cartas, hud, temp_mesa_jogador, temp_mesa_inimigo, &menu);
 
-		int menu;
+		scanf("%s", cmd);
 
-		menu = 0;
+		// Pega a o valor em cmd e converte para um inteiro e atribui ao comand que será o comando do jogador
+		comand = Comando(cmd, &atgame);
 
-		game_ini = 0;
-
-		IniciarJogo(&game_ini, mesa_aliada, mesa_inimiga, mao_jogador);
-
-		DesenharMesa(mesa_aliada, mesa_inimiga, mao_jogador, cartas, hud);
-
-		scanf("%s", &cmd);
-
-		comand = Comando(cmd);
-
-		MudarHud(comand, hud, cartas, &atgame, &menu, mao_jogador);
+		// Muda a hud e os elementos do jogo de acordo com os comandos do jogador
+		Controle(comand, hud, cartas, &atgame, &menu, mao_jogador, mesa_aliada, mesa_inimiga, temp_mesa_jogador, temp_mesa_inimigo, vida);
 
 	}
+
 
 	return 0;
 }
