@@ -18,7 +18,7 @@ void AI(int *mesa_aliada, int *mesa_inimiga, int *mao_inimiga, CARTA *carta, TEM
 			//verifica as cartas que estao na mesa aliada e compara com uma das cartas que possui na mao
 			if (carta[mao_inimiga[n]].atk > temp_mesa_jogador[m].atk) {
 
-			
+
 
 				if (carta[mao_inimiga[n]].atk > temp_mesa_jogador[m].def) {
 					cont++;
@@ -277,12 +277,12 @@ void CriarHUD(HUD *hud) {
 	strcpy(hud->linhas[1].linha, "   | PONTOS DE VIDA |");
 	strcpy(hud->linhas[2].linha, "+--+----------------+--+");
 	strcpy(hud->linhas[3].linha, "|          VOCÊ        |");
-	strcpy(hud->linhas[4].linha, "|          8000        |");
+	strcpy(hud->linhas[4].linha, "|                      |");
 	strcpy(hud->linhas[5].linha, "+----------------------+");
 	strcpy(hud->linhas[6].linha, "|                      |");
 	strcpy(hud->linhas[7].linha, "+----------------------+");
 	strcpy(hud->linhas[8].linha, "|        INIMIGO       |");
-	strcpy(hud->linhas[9].linha, "|         8000         |");
+	strcpy(hud->linhas[9].linha, "|                      |");
 	strcpy(hud->linhas[10].linha, "+----------------------+");
 
 }
@@ -917,13 +917,13 @@ int ContaAlgarismos(int num) {
 
 		temp = temp / 10;
 
-		printf("temp -> %i\n", temp);
+		
 
 		count++;
 
 	}
 
-	printf("count -> %i\n", count );
+
 	return count;
 }
 
@@ -937,24 +937,24 @@ void AtualizarPlacar(HUD *hud, int *vida) {
 	int tam_vidaJogador = ContaAlgarismos(vida_jogador);
 	int tam_vidaInimigo = ContaAlgarismos(vida_inimigo);
 
+	hud += 3;
+
+	char str_jogador[10];
+
+	char str_inimigo[10];
+
+	sprintf(str_jogador, "%d", vida_jogador);
+	sprintf(str_inimigo, "%d", vida_inimigo);
+
 	for (i = 0; i < tam_vidaJogador; i++) {
 
-		int caracter = vida_jogador / (pow(10.0, (double)(tam_vidaInimigo - i )));
-
-		printf("caracter -> %i \n", caracter );
-
-		hud->linhas[4].linha[11 + i] = (48 + caracter);
+		hud->linhas[4].linha[11 + i] = str_jogador[i];
 	}
 
 	for (i = 0; i < tam_vidaInimigo; i++) {
 
-
-		int caracter = vida_inimigo / (pow(10.0, (double)(tam_vidaInimigo - i )));
-
-		hud->linhas[9].linha[11 + i] = (48 + caracter);
+		hud->linhas[9].linha[11 + i] = str_inimigo[i];
 	}
-
-
 
 }
 // Função responsável por desenhar as telas do jogo.
@@ -1534,6 +1534,7 @@ void Controle(int comand, HUD * hud, CARTA * cartas, int *atgame, int *menu, int
 
 			mesa_inimiga_escolha = comand;
 			vida[0] -= AtacarCarta(mesa_aliada_escolha, mesa_inimiga_escolha, temp_mesa_jogador, temp_mesa_inimigo, mesa_aliada, mesa_inimiga, vida);
+			AtualizarPlacar(hud, vida);
 			// checar se ainda há cartas para atacar
 			for (i = 0; i < TAM_PADRAO; i++) {
 
@@ -1569,6 +1570,7 @@ void Controle(int comand, HUD * hud, CARTA * cartas, int *atgame, int *menu, int
 
 			mesa_inimiga_escolha = comand;
 			vida[0] -= AtacarCarta(mesa_aliada_escolha, mesa_inimiga_escolha, temp_mesa_jogador, temp_mesa_inimigo, mesa_aliada, mesa_inimiga, vida);
+			AtualizarPlacar(hud, vida);
 			// checar se ainda há cartas para atacar
 			for (i = 0; i < TAM_PADRAO; i++) {
 
@@ -1603,6 +1605,7 @@ void Controle(int comand, HUD * hud, CARTA * cartas, int *atgame, int *menu, int
 
 			mesa_inimiga_escolha = comand;
 			vida[0] -= AtacarCarta(mesa_aliada_escolha, mesa_inimiga_escolha, temp_mesa_jogador, temp_mesa_inimigo, mesa_aliada, mesa_inimiga, vida);
+			AtualizarPlacar(hud, vida);
 			// checar se ainda há cartas para atacar
 			for (i = 0; i < TAM_PADRAO; i++) {
 
@@ -1636,6 +1639,7 @@ void Controle(int comand, HUD * hud, CARTA * cartas, int *atgame, int *menu, int
 
 			mesa_inimiga_escolha = comand;
 			vida[0] -= AtacarCarta(mesa_aliada_escolha, mesa_inimiga_escolha, temp_mesa_jogador, temp_mesa_inimigo, mesa_aliada, mesa_inimiga, vida);
+			AtualizarPlacar(hud, vida);
 			// checar se ainda há cartas para atacar
 			for (i = 0; i < TAM_PADRAO; i++) {
 
@@ -1669,6 +1673,7 @@ void Controle(int comand, HUD * hud, CARTA * cartas, int *atgame, int *menu, int
 
 			mesa_inimiga_escolha = comand;
 			vida[0] -= AtacarCarta(mesa_aliada_escolha, mesa_inimiga_escolha, temp_mesa_jogador, temp_mesa_inimigo, mesa_aliada, mesa_inimiga, vida);
+			AtualizarPlacar(hud, vida);
 			// checar se ainda há cartas para atacar
 			for (i = 0; i < TAM_PADRAO; i++) {
 
@@ -1702,6 +1707,7 @@ void Controle(int comand, HUD * hud, CARTA * cartas, int *atgame, int *menu, int
 
 			mesa_inimiga_escolha = comand;
 			vida[0] -= AtacarCarta(mesa_aliada_escolha, mesa_inimiga_escolha, temp_mesa_jogador, temp_mesa_inimigo, mesa_aliada, mesa_inimiga, vida);
+			AtualizarPlacar(hud, vida);
 			// checar se ainda há cartas para atacar
 			for (i = 0; i < TAM_PADRAO; i++) {
 
