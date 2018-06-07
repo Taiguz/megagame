@@ -91,7 +91,7 @@ void LimparTela(int);
 void LimparMenu(HUD*);
 void MudarTela(int, int*, int*, int*);
 void SumonarCarta(int,int,int*, int*, TEMP_CARTA*, CARTA*);
-void Controle(int, HUD*, CARTA*, int*, int*, int*, int*, int*, TEMP_CARTA*,TEMP_CARTA*, int*);
+void Controle(int, HUD*, CARTA*, int*, int*,int*, int*, int*, int*, TEMP_CARTA*,TEMP_CARTA*, int*);
 void TransicaoTela(int, int*, int*, TELA*);
 void IniciarJogo(int*, int*, int*, int*,int*, TEMP_CARTA*, TEMP_CARTA*,CARTA*);
 int AtacarCarta(int, int, TEMP_CARTA*,TEMP_CARTA*, int*, int*,int*);

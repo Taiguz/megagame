@@ -8,9 +8,10 @@
 
 
 void AI(int *mesa_aliada, int *mesa_inimiga, int *mao_inimiga, CARTA *carta, TEMP_CARTA *temp_mesa_jogador, TEMP_CARTA *temp_mesa_inimigo, int *vida) {
+
 	int cont = 0;
 	int jogoucarta = 0;
-
+	printf("yay\n");
 	//le as cartas que estao na mao
 	for (int n = 0; n < 4; n++) {
 
@@ -18,10 +19,14 @@ void AI(int *mesa_aliada, int *mesa_inimiga, int *mao_inimiga, CARTA *carta, TEM
 			//verifica as cartas que estao na mesa aliada e compara com uma das cartas que possui na mao
 			if (carta[mao_inimiga[n]].atk > temp_mesa_jogador[m].atk) {
 
+				printf("atk -> %i\n", temp_mesa_jogador[m].atk );
+
 				if (carta[mao_inimiga[n]].atk > temp_mesa_jogador[m].def) {
 					cont++;
+
 					break;
 				}
+
 			} else if (carta[mao_inimiga[n]].atk < temp_mesa_jogador[m].atk) {
 				continue;
 			}
@@ -30,9 +35,8 @@ void AI(int *mesa_aliada, int *mesa_inimiga, int *mao_inimiga, CARTA *carta, TEM
 		if (cont > 0) {
 
 
-
-
-			SumonarCarta(0, n, mesa_inimiga, mao_inimiga, temp_mesa_inimigo, carta); //sumonar carta que atende aos condicionais
+			SumonarCarta(0, n, mesa_inimiga, mao_inimiga, temp_mesa_inimigo, carta);
+			//sumonar carta que atende aos condicionais
 
 			jogoucarta = 1;
 
@@ -264,23 +268,26 @@ void CriarHUD(HUD *hud) {
 	strcpy(hud->linhas[34].linha, "|                      |");
 	strcpy(hud->linhas[35].linha, "+----------------------+");
 	hud++;
-	strcpy(hud->linhas[0].linha, "                                                    +---------+                                                   ");
-	strcpy(hud->linhas[1].linha, "+---------------------------------------------------+ SUA MÃO +----------------------------------------------+");
-	strcpy(hud->linhas[2].linha, "                                                    +---------+                                                   ");
+	strcpy(hud->linhas[0].linha, "                                                    +---------+                                               ");
+	strcpy(hud->linhas[1].linha, "+---------------------------------------------------+ SUA MÃO +---------------------------------------------+ ");
+	strcpy(hud->linhas[2].linha, "                                                    +---------+                                               ");
 
 	hud ++;
 
-	strcpy(hud->linhas[0].linha, "   +-------+");
-	strcpy(hud->linhas[1].linha, "   | VOCE  |");
-	strcpy(hud->linhas[2].linha, "+--+-------+-+");
-	strcpy(hud->linhas[3].linha, "|    8000    |");
-	strcpy(hud->linhas[4].linha, "+------------+");
-	strcpy(hud->linhas[5].linha, "              ");
-	strcpy(hud->linhas[6].linha, " +---------+");
-	strcpy(hud->linhas[7].linha, " | INIMIGO |");
-	strcpy(hud->linhas[8].linha, "++---------++");
-	strcpy(hud->linhas[9].linha, "|   8000    |");
-	strcpy(hud->linhas[10].linha, "+-----------+");
+	strcpy(hud->linhas[0].linha, "   +----------------+");
+	strcpy(hud->linhas[1].linha, "   | PONTOS DE VIDA |");
+	strcpy(hud->linhas[2].linha, "+--+----------------+--+");
+	strcpy(hud->linhas[3].linha, "|          VOCÊ        |");
+	strcpy(hud->linhas[4].linha, "|          8000        |");
+	strcpy(hud->linhas[5].linha, "+----------------------+");
+	strcpy(hud->linhas[6].linha, "|                      |");
+	strcpy(hud->linhas[7].linha, "+----------------------+");
+	strcpy(hud->linhas[8].linha, "|        INIMIGO       |");
+	strcpy(hud->linhas[9].linha, "|         8000         |");
+	strcpy(hud->linhas[10].linha, "+----------------------+");
+
+
+
 }
 //Função que irá criar todas as cartas do jogo.
 void CriarCartas(CARTA *cartas) {
@@ -533,7 +540,7 @@ void DesenharMesa(int *mesa_aliada, int *mesa_inimiga, int *mao_jogador, CARTA *
 
 	int count_hud, i, j;
 	count_hud = 0;
-	int count_hud2 = 3;
+	int count_hud3 = 3;
 	i = 0;
 	j = 0;
 	// Inicio e fim das structs
@@ -630,11 +637,12 @@ void DesenharMesa(int *mesa_aliada, int *mesa_inimiga, int *mao_jogador, CARTA *
 	}
 	hud ++;
 	//Desenha 3 linhas para separar o campo do jogo das cartas na mão do jogador
-	for (i = 0; i <= 3; i++) {
+	for (i = 0; i < 3; i++) {
 
-		printf("%s\n", hud->linhas[i].linha);
-		//printf("%s\n", (hud + 1)->linhas[i].linha);
+		printf("%s", hud->linhas[i].linha);
+		printf("%s\n", (hud + 1)->linhas[i].linha);
 	}
+	hud++;
 	// Desenha mais 17 linhas para as cartas na mão do jogador
 	for (j = 0; j <= TAM_CARTA; j++) {
 		for (i = 0; i < TAM_PADRAO; i++) {
@@ -659,6 +667,17 @@ void DesenharMesa(int *mesa_aliada, int *mesa_inimiga, int *mao_jogador, CARTA *
 
 		}
 		*/
+		// Desenha a HUD que mostra a vida
+
+		if (count_hud3 <= 11) {
+
+			printf("%s", hud->linhas[j + 3].linha);
+
+			count_hud3++;
+
+		}
+
+
 		printf("\n");
 	}
 
@@ -1040,17 +1059,17 @@ void IniciarJogo(int *mesa_aliada, int *mesa_inimiga, int *mao_jogador, int *mao
 	mesa_inimiga[3] = -1;
 	mesa_inimiga[4] = -1;
 
-	mao_jogador[0] = 2;
-	mao_jogador[1] = 3;
+	mao_jogador[0] = 1;
+	mao_jogador[1] = 1;
 	mao_jogador[2] = 5;
 	mao_jogador[3] = 4;
 	mao_jogador[4] = 1;
 
-	mao_inimiga[0] = 2;
+	mao_inimiga[0] = 3;
 	mao_inimiga[1] = 3;
-	mao_inimiga[2] = 5;
-	mao_inimiga[3] = 4;
-	mao_inimiga[4] = 0;
+	mao_inimiga[2] = 3;
+	mao_inimiga[3] = 3;
+	mao_inimiga[4] = 3;
 
 	for (i = 0; i < TAM_PADRAO; i++) {
 
@@ -1111,7 +1130,7 @@ void IniciarJogo(int *mesa_aliada, int *mesa_inimiga, int *mao_jogador, int *mao
 
 }
 // Muda a hud e os elementos do jogo de acordo com os comandos do jogador
-void Controle(int comand, HUD * hud, CARTA * cartas, int *atgame, int *menu, int *mao_jogador, int *mesa_aliada, int *mesa_inimiga, TEMP_CARTA *temp_mesa_jogador, TEMP_CARTA *temp_mesa_inimigo, int *vida) {
+void Controle(int comand, HUD * hud, CARTA * cartas, int *atgame, int *menu, int *mao_jogador, int *mao_inimiga, int *mesa_aliada, int *mesa_inimiga, TEMP_CARTA *temp_mesa_jogador, TEMP_CARTA *temp_mesa_inimigo, int *vida) {
 
 	int i;
 	static int mesa_aliada_escolha;
@@ -1177,6 +1196,7 @@ void Controle(int comand, HUD * hud, CARTA * cartas, int *atgame, int *menu, int
 			break;
 		case 3 :
 			//Passar Vez
+			AI(mesa_aliada, mesa_inimiga, mao_inimiga, cartas, temp_mesa_jogador, temp_mesa_inimigo, vida);
 			break;
 
 
@@ -1297,7 +1317,7 @@ void Controle(int comand, HUD * hud, CARTA * cartas, int *atgame, int *menu, int
 		case 3 :
 			//Passar Vez
 			// passar vez
-			//AI();
+			AI(mesa_aliada, mesa_inimiga, mao_inimiga, cartas, temp_mesa_jogador, temp_mesa_inimigo, vida);
 			DesenharMenu(0, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu, temp_mesa_jogador);
 			*menu = 0;
 			break;
@@ -1396,7 +1416,7 @@ void Controle(int comand, HUD * hud, CARTA * cartas, int *atgame, int *menu, int
 
 		case 1:
 			// passar vez
-			//AI();
+			AI(mesa_aliada, mesa_inimiga, mao_inimiga, cartas, temp_mesa_jogador, temp_mesa_inimigo, vida);
 			LimparMenu(hud);
 			DesenharMenu(0, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu, temp_mesa_jogador);
 			*menu = 0;
