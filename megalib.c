@@ -11,7 +11,6 @@ void AI(int *mesa_aliada, int *mesa_inimiga, int *mao_inimiga, CARTA *carta, TEM
 
 	int cont = 0;
 	int jogoucarta = 0;
-	printf("yay\n");
 	//le as cartas que estao na mao
 	for (int n = 0; n < 4; n++) {
 
@@ -19,7 +18,7 @@ void AI(int *mesa_aliada, int *mesa_inimiga, int *mao_inimiga, CARTA *carta, TEM
 			//verifica as cartas que estao na mesa aliada e compara com uma das cartas que possui na mao
 			if (carta[mao_inimiga[n]].atk > temp_mesa_jogador[m].atk) {
 
-				printf("atk -> %i\n", temp_mesa_jogador[m].atk );
+			
 
 				if (carta[mao_inimiga[n]].atk > temp_mesa_jogador[m].def) {
 					cont++;
@@ -66,7 +65,7 @@ void AI(int *mesa_aliada, int *mesa_inimiga, int *mao_inimiga, CARTA *carta, TEM
 					//verifica se vale a pena atacar ou colocar em modo defesa
 					if (temp_mesa_jogador[n].atk < temp_mesa_inimigo[m].atk && temp_mesa_jogador[n].modo != 1 ) {
 
-						AtacarCarta(m, n, temp_mesa_inimigo, temp_mesa_jogador, mesa_inimiga, mesa_aliada, vida );
+						vida[1] -= AtacarCarta(m, n, temp_mesa_inimigo, temp_mesa_jogador, mesa_inimiga, mesa_aliada, vida );
 						//atacar carta que atende aos condicionais
 						// Com qual carta ?
 
@@ -86,7 +85,7 @@ void AI(int *mesa_aliada, int *mesa_inimiga, int *mao_inimiga, CARTA *carta, TEM
 						// Que carta ?
 					} else {
 
-						AtacarCarta(m, n, temp_mesa_inimigo, temp_mesa_jogador, mesa_inimiga, mesa_aliada, vida);
+						vida[1] -= AtacarCarta(m, n, temp_mesa_inimigo, temp_mesa_jogador, mesa_inimiga, mesa_aliada, vida);
 						// Com que carta ?
 						//atacar carta que atende aos condicionais
 					}
@@ -94,7 +93,7 @@ void AI(int *mesa_aliada, int *mesa_inimiga, int *mao_inimiga, CARTA *carta, TEM
 					//verifica se vale a pena atacar a carta em modo defesa ou colocar em modo de defesa
 					if (temp_mesa_jogador[n].def < temp_mesa_inimigo[n].atk && temp_mesa_jogador[n].modo != 0 ) {
 
-						AtacarCarta(m, n, temp_mesa_inimigo, temp_mesa_jogador, mesa_inimiga, mesa_aliada, vida);
+						vida[1] -= AtacarCarta(m, n, temp_mesa_inimigo, temp_mesa_jogador, mesa_inimiga, mesa_aliada, vida);
 						//atacar carta que atende aos condicionais
 
 					} else {
@@ -110,7 +109,7 @@ void AI(int *mesa_aliada, int *mesa_inimiga, int *mao_inimiga, CARTA *carta, TEM
 						//modo de defesa
 					} else {
 
-						AtacarCarta(m, n, temp_mesa_inimigo, temp_mesa_jogador, mesa_inimiga, mesa_aliada, vida);
+						vida[1] -= AtacarCarta(m, n, temp_mesa_inimigo, temp_mesa_jogador, mesa_inimiga, mesa_aliada, vida);
 						//atacar carta que atende aos condicionais
 					}
 
@@ -285,8 +284,6 @@ void CriarHUD(HUD *hud) {
 	strcpy(hud->linhas[8].linha, "|        INIMIGO       |");
 	strcpy(hud->linhas[9].linha, "|         8000         |");
 	strcpy(hud->linhas[10].linha, "+----------------------+");
-
-
 
 }
 //Função que irá criar todas as cartas do jogo.
@@ -910,6 +907,56 @@ void DesenharMenu(int escolha, HUD * hud, CARTA * cartas, int *mao_jogador, int 
 	}
 
 }
+int ContaAlgarismos(int num) {
+
+	int count = 0;
+
+	int temp = num;
+
+	while (temp > 0) {
+
+		temp = temp / 10;
+
+		printf("temp -> %i\n", temp);
+
+		count++;
+
+	}
+
+	printf("count -> %i\n", count );
+	return count;
+}
+
+void AtualizarPlacar(HUD *hud, int *vida) {
+
+	int i;
+
+	int vida_jogador = vida[0];
+	int vida_inimigo = vida[1];
+
+	int tam_vidaJogador = ContaAlgarismos(vida_jogador);
+	int tam_vidaInimigo = ContaAlgarismos(vida_inimigo);
+
+	for (i = 0; i < tam_vidaJogador; i++) {
+
+		int caracter = vida_jogador / (pow(10.0, (double)(tam_vidaInimigo - i )));
+
+		printf("caracter -> %i \n", caracter );
+
+		hud->linhas[4].linha[11 + i] = (48 + caracter);
+	}
+
+	for (i = 0; i < tam_vidaInimigo; i++) {
+
+
+		int caracter = vida_inimigo / (pow(10.0, (double)(tam_vidaInimigo - i )));
+
+		hud->linhas[9].linha[11 + i] = (48 + caracter);
+	}
+
+
+
+}
 // Função responsável por desenhar as telas do jogo.
 void DesenharTela(int tel, TELA * telas) {
 
@@ -1124,9 +1171,9 @@ void IniciarJogo(int *mesa_aliada, int *mesa_inimiga, int *mao_jogador, int *mao
 	*/
 
 
-	vida[0] = 4000;
+	vida[0] = 8000;
 
-	vida[1] = 4000;
+	vida[1] = 8000;
 
 }
 // Muda a hud e os elementos do jogo de acordo com os comandos do jogador

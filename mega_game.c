@@ -121,6 +121,8 @@ int main(int argc, char const *argv[]) {
 		// Muda a hud e os elementos do jogo de acordo com os comandos do jogador
 		Controle(comand, hud, cartas, &atgame, &menu, mao_jogador, mao_inimiga, mesa_aliada, mesa_inimiga, temp_mesa_jogador, temp_mesa_inimigo, vida);
 
+		AtualizarPlacar(hud,vida);
+
 	}
 
 

@@ -95,6 +95,8 @@ void Controle(int, HUD*, CARTA*, int*, int*,int*, int*, int*, int*, TEMP_CARTA*,
 void TransicaoTela(int, int*, int*, TELA*);
 void IniciarJogo(int*, int*, int*, int*,int*, TEMP_CARTA*, TEMP_CARTA*,CARTA*);
 int AtacarCarta(int, int, TEMP_CARTA*,TEMP_CARTA*, int*, int*,int*);
+void AtualizarPlacar(HUD*,int*);
+int ContaAlgarismos(int);
 void TrocarModo(int,TEMP_CARTA*);
 void AI(int*,int*,int*,CARTA*,TEMP_CARTA*,TEMP_CARTA*,int*);
 
