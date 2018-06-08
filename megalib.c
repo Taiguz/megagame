@@ -5,6 +5,7 @@
 #include "megalib.h"
 #define HUD_INICIO 26
 #define HUD_FIM 34
+#define TAM_DECK 20
 
 
 void AI(int *mesa_aliada, int *mesa_inimiga, int *mao_inimiga, CARTA *carta, TEMP_CARTA *temp_mesa_jogador, TEMP_CARTA *temp_mesa_inimigo, int *vida) {
@@ -85,7 +86,7 @@ void AI(int *mesa_aliada, int *mesa_inimiga, int *mao_inimiga, CARTA *carta, TEM
 						// Que carta ?
 					} else {
 
-						vida[1] -= AtacarCarta(m, n, temp_mesa_inimigo, temp_mesa_jogador, mesa_inimiga, mesa_aliada, vida);
+						vida[1] -= AtacarCarta(m, n, temp_mesa_inimigo, temp_mesa_jogador, mesa_inimiga, mesa_aliada, vida );
 						// Com que carta ?
 						//atacar carta que atende aos condicionais
 					}
@@ -917,7 +918,7 @@ int ContaAlgarismos(int num) {
 
 		temp = temp / 10;
 
-		
+
 
 		count++;
 
@@ -933,6 +934,9 @@ void AtualizarPlacar(HUD *hud, int *vida) {
 
 	int vida_jogador = vida[0];
 	int vida_inimigo = vida[1];
+
+	printf("vida jogador -> %i\n", vida_jogador);
+	printf("vida inimigo -> %i\n", vida_inimigo);
 
 	int tam_vidaJogador = ContaAlgarismos(vida_jogador);
 	int tam_vidaInimigo = ContaAlgarismos(vida_inimigo);
@@ -1090,33 +1094,171 @@ void TransicaoTela(int tela_num, int *tela_anterior, int *tela_criar, TELA * tel
 
 	}
 }
+
+void IniciarInimigos(INIMIGO *inimigos) {
+
+	inimigos->deck[0] = 3;
+	inimigos->deck[1] = 2;
+	inimigos->deck[2] = 3;
+	inimigos->deck[3] = 2;
+	inimigos->deck[4] = 3;
+	inimigos->deck[5] = 2;
+	inimigos->deck[6] = 3;
+	inimigos->deck[7] = 2;
+	inimigos->deck[8] = 3;
+	inimigos->deck[9] = 2;
+	inimigos->deck[10] = 3;
+	inimigos->deck[11] = 2;
+	inimigos->deck[12] = 3;
+	inimigos->deck[13] = 2;
+	inimigos->deck[14] = 3;
+	inimigos->deck[15] = 2;
+	inimigos->deck[16] = 3;
+	inimigos->deck[17] = 2;
+	inimigos->deck[18] = 3;
+	inimigos->deck[19] = 2;
+
+	strcpy(inimigos->nome, "Seto Procópio");
+
+	inimigos++;
+
+	inimigos->deck[0] = 3;
+	inimigos->deck[1] = 2;
+	inimigos->deck[2] = 3;
+	inimigos->deck[3] = 2;
+	inimigos->deck[4] = 3;
+	inimigos->deck[5] = 2;
+	inimigos->deck[6] = 3;
+	inimigos->deck[7] = 2;
+	inimigos->deck[8] = 3;
+	inimigos->deck[9] = 2;
+	inimigos->deck[10] = 3;
+	inimigos->deck[11] = 2;
+	inimigos->deck[12] = 3;
+	inimigos->deck[13] = 2;
+	inimigos->deck[14] = 3;
+	inimigos->deck[15] = 2;
+	inimigos->deck[16] = 3;
+	inimigos->deck[17] = 2;
+	inimigos->deck[18] = 3;
+	inimigos->deck[19] = 2;
+
+	strcpy(inimigos->nome, "Jono");
+
+	inimigos++;
+
+	inimigos->deck[0] = 3;
+	inimigos->deck[1] = 2;
+	inimigos->deck[2] = 3;
+	inimigos->deck[3] = 2;
+	inimigos->deck[4] = 3;
+	inimigos->deck[5] = 2;
+	inimigos->deck[6] = 3;
+	inimigos->deck[7] = 2;
+	inimigos->deck[8] = 3;
+	inimigos->deck[9] = 2;
+	inimigos->deck[10] = 3;
+	inimigos->deck[11] = 2;
+	inimigos->deck[12] = 3;
+	inimigos->deck[13] = 2;
+	inimigos->deck[14] = 3;
+	inimigos->deck[15] = 2;
+	inimigos->deck[16] = 3;
+	inimigos->deck[17] = 2;
+	inimigos->deck[18] = 3;
+	inimigos->deck[19] = 2;
+
+	strcpy(inimigos->nome, "Yami Redaj");
+}
+void EmbaralharDecks(int *deck_jogador, INIMIGO *inimigos) {
+
+	int temp_deck[TAM_DECK];
+
+	int ind = 0;
+
+	//Embaralha as cartas do jogador
+	for (int i = 0; i < TAM_DECK; i++) {
+
+		temp_deck[i] = -1;
+	}
+
+	for (int i = 0; i < TAM_DECK; i++) {
+
+		do  {
+
+			ind = rand() % 20;
+
+
+			if (temp_deck[ind] == -1) {
+
+				temp_deck[ind] = deck_jogador[i];
+
+				break;
+
+			}
+
+
+		} while (temp_deck[ind] != -1);
+
+
+	}
+
+	for (int i = 0; i < TAM_DECK; i++) {
+
+		*(deck_jogador + i) = temp_deck[i];
+
+	}
+
+	//Embaralha as cartas do inimigo escolhido
+
+	for (int i = 0; i < TAM_DECK; i++) {
+
+		temp_deck[i] = -1;
+	}
+
+	for (int i = 0; i < TAM_DECK; i++) {
+
+		do  {
+
+			ind = rand() % 21;
+
+			if (temp_deck[ind] == -1) {
+
+				temp_deck[ind] = inimigos->deck[i];
+
+				break;
+			}
+
+
+		} while (temp_deck[ind] != -1);
+
+
+	}
+
+	for (int i = 0; i < TAM_DECK; i++) {
+
+		inimigos->deck[i] = temp_deck[i];
+
+	}
+
+}
+
 // Inicia todas as variaveis referentes ao inicio do jogo
-void IniciarJogo(int *mesa_aliada, int *mesa_inimiga, int *mao_jogador, int *mao_inimiga, int *vida, TEMP_CARTA *temp_mesa_jogador, TEMP_CARTA *temp_mesa_inimigo, CARTA * cartas) {
+void IniciarJogo(int *mesa_aliada, int *mesa_inimiga, int *mao_jogador, int *mao_inimiga, int *vida, TEMP_CARTA *temp_mesa_jogador, TEMP_CARTA *temp_mesa_inimigo, CARTA * cartas, INIMIGO *inimigos, int *deck_jogador) {
 
 	int i;
+
 	mesa_aliada[0] = -1;
 	mesa_aliada[1] = -1;
 	mesa_aliada[2] = -1;
 	mesa_aliada[3] = -1;
 	mesa_aliada[4] = -1;
 
-	mesa_inimiga[0] = 1;
-	mesa_inimiga[1] = 2;
+	mesa_inimiga[0] = -1;
+	mesa_inimiga[1] = -1;
 	mesa_inimiga[2] = -1;
 	mesa_inimiga[3] = -1;
 	mesa_inimiga[4] = -1;
-
-	mao_jogador[0] = 1;
-	mao_jogador[1] = 1;
-	mao_jogador[2] = 5;
-	mao_jogador[3] = 4;
-	mao_jogador[4] = 1;
-
-	mao_inimiga[0] = 3;
-	mao_inimiga[1] = 3;
-	mao_inimiga[2] = 3;
-	mao_inimiga[3] = 3;
-	mao_inimiga[4] = 3;
 
 	for (i = 0; i < TAM_PADRAO; i++) {
 
@@ -1137,47 +1279,180 @@ void IniciarJogo(int *mesa_aliada, int *mesa_inimiga, int *mao_jogador, int *mao
 
 	}
 
-	/*
-	*mesa_aliada = -1;
-	mesa_aliada++;
-	*mesa_aliada = -1;
-	mesa_aliada++;
-	*mesa_aliada = -1;
-	mesa_aliada++;
-	*mesa_aliada = -1;
-	mesa_aliada++;
-	*mesa_aliada = -1;
-
-
-	*mesa_inimiga = 2;
-	mesa_inimiga++;
-	*mesa_inimiga = 3;
-	mesa_inimiga++;
-	*mesa_inimiga = -1;
-	mesa_inimiga++;
-	*mesa_inimiga = -1;
-	mesa_inimiga++;
-	*mesa_inimiga = -1;
-
-	*mao_jogador = 0;
-	mao_jogador++;
-	*mao_jogador = 5;
-	mao_jogador++;
-	*mao_jogador = 2;
-	mao_jogador++;
-	*mao_jogador = 3;
-	mao_jogador++;
-	*mao_jogador = 4;
-	*/
-
 
 	vida[0] = 8000;
 
 	vida[1] = 8000;
 
+	IniciarInimigos(inimigos);
+
+	deck_jogador[0] = 1;
+	deck_jogador[1] = 2;
+	deck_jogador[2] = 4;
+	deck_jogador[3] = 1;
+	deck_jogador[4] = 2;
+	deck_jogador[5] = 1;
+	deck_jogador[6] = 2;
+	deck_jogador[7] = 1;
+	deck_jogador[8] = 3;
+	deck_jogador[9] = 1;
+	deck_jogador[10] = 1;
+	deck_jogador[11] = 3;
+	deck_jogador[12] = 1;
+	deck_jogador[13] = 4;
+	deck_jogador[14] = 1;
+	deck_jogador[15] = 1;
+	deck_jogador[16] = 3;
+	deck_jogador[17] = 2;
+	deck_jogador[18] = 1;
+	deck_jogador[19] = 2;
+
+	EmbaralharDecks(deck_jogador, inimigos);
+
+	mao_jogador[0] = -1;
+	mao_jogador[1] = -1;
+	mao_jogador[2] = -1;
+	mao_jogador[3] = -1;
+	mao_jogador[4] = -1;
+
+	mao_inimiga[0] = -1;
+	mao_inimiga[1] = -1;
+	mao_inimiga[2] = -1;
+	mao_inimiga[3] = -1;
+	mao_inimiga[4] = -1;
+
+	DarCartas(1, deck_jogador, inimigos, mao_jogador, mao_inimiga);
+
+}
+void DarCartas(int inicio, int *deck_jogador, INIMIGO *inimigos, int *mao_jogador, int *mao_inimiga) {
+
+	if (inicio) {
+
+		mao_jogador[0] = deck_jogador[0];
+		mao_jogador[1] = deck_jogador[1];
+		mao_jogador[2] = deck_jogador[2];
+		mao_jogador[3] = deck_jogador[3];
+		mao_jogador[4] = deck_jogador[4];
+
+		mao_inimiga[0] = inimigos->deck[0];
+		mao_inimiga[1] = inimigos->deck[1];
+		mao_inimiga[2] = inimigos->deck[2];
+		mao_inimiga[3] = inimigos->deck[3];
+		mao_inimiga[4] = inimigos->deck[4];
+
+		deck_jogador[0] = -1;
+		deck_jogador[1] = -1;
+		deck_jogador[2] = -1;
+		deck_jogador[3] = -1;
+		deck_jogador[4] = -1;
+
+		inimigos->deck[0] = -1;
+		inimigos->deck[1] = -1;
+		inimigos->deck[2] = -1;
+		inimigos->deck[3] = -1;
+		inimigos->deck[4] = -1;
+
+
+	} else {
+
+
+		// Pega uma carta do baralho e coloca na mao do jogador
+		int ind = -1;
+
+		for (int i = 0; i < 5; i++) {
+
+			if (mao_jogador[i] == -1) {
+
+			}
+		}
+
+		if (ind != -1) {
+
+
+			int ind2 = -1;
+
+			for (int i = 0; i < TAM_DECK; i++) {
+
+				if (deck_jogador[i] != -1) {
+					ind2 = i;
+					break;
+				}
+
+			}
+
+			if (ind2 != -1) {
+
+				mao_jogador[ind] = deck_jogador[ind2];
+				deck_jogador[ind2] = -1;
+				OrganizarMao(mao_jogador);
+
+			} else {
+
+				// Não há mais cartas no baralho;
+			}
+
+		}
+
+
+		ind = -1;
+
+		for (int i = 0; i < 5; i++) {
+
+			if (mao_inimiga[i] == -1) {
+
+			}
+		}
+
+		if (ind != -1) {
+
+
+			int ind2 = -1;
+
+			for (int i = 0; i < TAM_DECK; i++) {
+
+				if (inimigos->deck[i] != -1) {
+					ind2 = i;
+					break;
+				}
+
+			}
+
+			if (ind2 != -1) {
+
+				mao_inimiga[ind] = inimigos->deck[ind2];
+				inimigos->deck[ind2] = -1;
+
+			} else {
+
+				// Não há mais cartas no baralho;
+			}
+
+		}
+
+	}
+}
+void OrganizarMao(int *mao_jogador) {
+
+	int temp[5];
+
+	for (int i = 0; i < 5; i++) {
+
+		temp[i] = -1;
+
+	}
+
+	for (int i = 0; i < 5; i++) {
+
+		if (mao_jogador[i] != -1) {
+
+			temp[i] = mao_jogador[i];
+
+		}
+
+	}
 }
 // Muda a hud e os elementos do jogo de acordo com os comandos do jogador
-void Controle(int comand, HUD * hud, CARTA * cartas, int *atgame, int *menu, int *mao_jogador, int *mao_inimiga, int *mesa_aliada, int *mesa_inimiga, TEMP_CARTA *temp_mesa_jogador, TEMP_CARTA *temp_mesa_inimigo, int *vida) {
+void Controle(int comand, HUD * hud, CARTA * cartas, int *atgame, int *menu, int *mao_jogador, int *mao_inimiga, int *mesa_aliada, int *mesa_inimiga, TEMP_CARTA *temp_mesa_jogador, TEMP_CARTA *temp_mesa_inimigo, int *vida, int *deck_jogador, INIMIGO *inimigos) {
 
 	int i;
 	static int mesa_aliada_escolha;
@@ -1244,6 +1519,7 @@ void Controle(int comand, HUD * hud, CARTA * cartas, int *atgame, int *menu, int
 		case 3 :
 			//Passar Vez
 			AI(mesa_aliada, mesa_inimiga, mao_inimiga, cartas, temp_mesa_jogador, temp_mesa_inimigo, vida);
+			DarCartas(0, deck_jogador, inimigos, mao_jogador, mao_inimiga);
 			break;
 
 
@@ -1365,6 +1641,7 @@ void Controle(int comand, HUD * hud, CARTA * cartas, int *atgame, int *menu, int
 			//Passar Vez
 			// passar vez
 			AI(mesa_aliada, mesa_inimiga, mao_inimiga, cartas, temp_mesa_jogador, temp_mesa_inimigo, vida);
+			DarCartas(0, deck_jogador, inimigos, mao_jogador, mao_inimiga);
 			DesenharMenu(0, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu, temp_mesa_jogador);
 			*menu = 0;
 			break;
@@ -1464,6 +1741,7 @@ void Controle(int comand, HUD * hud, CARTA * cartas, int *atgame, int *menu, int
 		case 1:
 			// passar vez
 			AI(mesa_aliada, mesa_inimiga, mao_inimiga, cartas, temp_mesa_jogador, temp_mesa_inimigo, vida);
+			DarCartas(0, deck_jogador, inimigos, mao_jogador, mao_inimiga);
 			LimparMenu(hud);
 			DesenharMenu(0, hud, cartas, mao_jogador, mesa_aliada, mesa_inimiga, menu, temp_mesa_jogador);
 			*menu = 0;
@@ -1533,7 +1811,7 @@ void Controle(int comand, HUD * hud, CARTA * cartas, int *atgame, int *menu, int
 		case 1:
 
 			mesa_inimiga_escolha = comand;
-			vida[0] -= AtacarCarta(mesa_aliada_escolha, mesa_inimiga_escolha, temp_mesa_jogador, temp_mesa_inimigo, mesa_aliada, mesa_inimiga, vida);
+			vida[0] -= AtacarCarta(mesa_aliada_escolha, mesa_inimiga_escolha, temp_mesa_jogador, temp_mesa_inimigo, mesa_aliada, mesa_inimiga, (vida + 1));
 			AtualizarPlacar(hud, vida);
 			// checar se ainda há cartas para atacar
 			for (i = 0; i < TAM_PADRAO; i++) {
@@ -1569,7 +1847,7 @@ void Controle(int comand, HUD * hud, CARTA * cartas, int *atgame, int *menu, int
 		case 2:
 
 			mesa_inimiga_escolha = comand;
-			vida[0] -= AtacarCarta(mesa_aliada_escolha, mesa_inimiga_escolha, temp_mesa_jogador, temp_mesa_inimigo, mesa_aliada, mesa_inimiga, vida);
+			vida[0] -= AtacarCarta(mesa_aliada_escolha, mesa_inimiga_escolha, temp_mesa_jogador, temp_mesa_inimigo, mesa_aliada, mesa_inimiga, (vida + 1));
 			AtualizarPlacar(hud, vida);
 			// checar se ainda há cartas para atacar
 			for (i = 0; i < TAM_PADRAO; i++) {
@@ -1604,7 +1882,7 @@ void Controle(int comand, HUD * hud, CARTA * cartas, int *atgame, int *menu, int
 		case 3:
 
 			mesa_inimiga_escolha = comand;
-			vida[0] -= AtacarCarta(mesa_aliada_escolha, mesa_inimiga_escolha, temp_mesa_jogador, temp_mesa_inimigo, mesa_aliada, mesa_inimiga, vida);
+			vida[0] -= AtacarCarta(mesa_aliada_escolha, mesa_inimiga_escolha, temp_mesa_jogador, temp_mesa_inimigo, mesa_aliada, mesa_inimiga, (vida + 1));
 			AtualizarPlacar(hud, vida);
 			// checar se ainda há cartas para atacar
 			for (i = 0; i < TAM_PADRAO; i++) {
@@ -1638,7 +1916,7 @@ void Controle(int comand, HUD * hud, CARTA * cartas, int *atgame, int *menu, int
 		case 4:
 
 			mesa_inimiga_escolha = comand;
-			vida[0] -= AtacarCarta(mesa_aliada_escolha, mesa_inimiga_escolha, temp_mesa_jogador, temp_mesa_inimigo, mesa_aliada, mesa_inimiga, vida);
+			vida[0] -= AtacarCarta(mesa_aliada_escolha, mesa_inimiga_escolha, temp_mesa_jogador, temp_mesa_inimigo, mesa_aliada, mesa_inimiga, (vida + 1));
 			AtualizarPlacar(hud, vida);
 			// checar se ainda há cartas para atacar
 			for (i = 0; i < TAM_PADRAO; i++) {
@@ -1672,7 +1950,7 @@ void Controle(int comand, HUD * hud, CARTA * cartas, int *atgame, int *menu, int
 		case 5:
 
 			mesa_inimiga_escolha = comand;
-			vida[0] -= AtacarCarta(mesa_aliada_escolha, mesa_inimiga_escolha, temp_mesa_jogador, temp_mesa_inimigo, mesa_aliada, mesa_inimiga, vida);
+			vida[0] -= AtacarCarta(mesa_aliada_escolha, mesa_inimiga_escolha, temp_mesa_jogador, temp_mesa_inimigo, mesa_aliada, mesa_inimiga, (vida + 1));
 			AtualizarPlacar(hud, vida);
 			// checar se ainda há cartas para atacar
 			for (i = 0; i < TAM_PADRAO; i++) {
@@ -1706,7 +1984,7 @@ void Controle(int comand, HUD * hud, CARTA * cartas, int *atgame, int *menu, int
 		case 6:
 
 			mesa_inimiga_escolha = comand;
-			vida[0] -= AtacarCarta(mesa_aliada_escolha, mesa_inimiga_escolha, temp_mesa_jogador, temp_mesa_inimigo, mesa_aliada, mesa_inimiga, vida);
+			vida[0] -= AtacarCarta(mesa_aliada_escolha, mesa_inimiga_escolha, temp_mesa_jogador, temp_mesa_inimigo, mesa_aliada, mesa_inimiga, (vida + 1));
 			AtualizarPlacar(hud, vida);
 			// checar se ainda há cartas para atacar
 			for (i = 0; i < TAM_PADRAO; i++) {
@@ -1744,6 +2022,7 @@ void Controle(int comand, HUD * hud, CARTA * cartas, int *atgame, int *menu, int
 	}
 
 }
+
 // Coloca uma carta em campo e tira a mesma da mão do jogador
 void SumonarCarta(int modo, int indice, int *mesa, int *mao, TEMP_CARTA *temp_carta, CARTA *cartas) {
 	int i;
@@ -1818,6 +2097,7 @@ int AtacarCarta(int indice_1, int indice_2, TEMP_CARTA *temp_mesa_jogador, TEMP_
 		if (dano_carta_jogador > dano_carta_inimigo) {
 
 			int diff = dano_carta_jogador - dano_carta_inimigo;
+
 			*vida -= diff;
 			mesa_inimiga[num2] = -1;
 			return 0;

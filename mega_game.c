@@ -21,7 +21,7 @@ TEMP_CARTA temp_mesa_jogador[5];
 TEMP_CARTA temp_mesa_inimigo[5];
 
 
-INIMIGO inimigos[10];
+INIMIGO inimigos[5];
 
 
 // Declarando variáveis a serem utilizadas neste código.
@@ -38,7 +38,7 @@ int mao_inimiga[5];
 
 int mao_jogador[5];
 
-int deck_jogador[40];
+int deck_jogador[20];
 
 int count;
 
@@ -105,8 +105,9 @@ int main(int argc, char const *argv[]) {
 	}
 
 	//Inicia as variáveis do jogo
-	IniciarJogo(mesa_aliada, mesa_inimiga, mao_jogador, mao_inimiga, vida, temp_mesa_jogador, temp_mesa_inimigo, cartas);
-
+	IniciarJogo(mesa_aliada, mesa_inimiga, mao_jogador, mao_inimiga, vida, temp_mesa_jogador, temp_mesa_inimigo, cartas, inimigos, deck_jogador);
+	
+	AtualizarPlacar(hud, vida);
 	//Executa enquanto estiver em jogo
 	while (atgame) {
 
@@ -119,9 +120,11 @@ int main(int argc, char const *argv[]) {
 		comand = Comando(cmd, &atgame);
 
 		// Muda a hud e os elementos do jogo de acordo com os comandos do jogador
-		Controle(comand, hud, cartas, &atgame, &menu, mao_jogador, mao_inimiga, mesa_aliada, mesa_inimiga, temp_mesa_jogador, temp_mesa_inimigo, vida);
+		Controle(comand, hud, cartas, &atgame, &menu, mao_jogador, mao_inimiga, mesa_aliada, mesa_inimiga, temp_mesa_jogador, temp_mesa_inimigo, vida, deck_jogador, inimigos);
 
-		AtualizarPlacar(hud,vida);
+
+
+		AtualizarPlacar(hud, vida);
 
 	}
 

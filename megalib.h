@@ -59,7 +59,7 @@ typedef struct {
 
 typedef struct {
 
-	int deck[40];
+	int deck[20];
 
 	char nome[50];
 
@@ -80,8 +80,8 @@ typedef struct {
 } MENU;
 
 // Definindo os Headers das funções
-int Comando(char*,int*);
-void DesenharMesa(int*, int*, int*, CARTA*, HUD*, TEMP_CARTA*,TEMP_CARTA*,int*);
+int Comando(char*, int*);
+void DesenharMesa(int*, int*, int*, CARTA*, HUD*, TEMP_CARTA*, TEMP_CARTA*, int*);
 void DesenharMenu(int, HUD*, CARTA*, int*, int*, int*, int*, TEMP_CARTA*);
 void DesenharTela(int, TELA*);
 void CriarHUD(HUD*);
@@ -90,15 +90,19 @@ void CriarTelas(TELA*);
 void LimparTela(int);
 void LimparMenu(HUD*);
 void MudarTela(int, int*, int*, int*);
-void SumonarCarta(int,int,int*, int*, TEMP_CARTA*, CARTA*);
-void Controle(int, HUD*, CARTA*, int*, int*,int*, int*, int*, int*, TEMP_CARTA*,TEMP_CARTA*, int*);
+void SumonarCarta(int, int, int*, int*, TEMP_CARTA*, CARTA*);
+void Controle(int, HUD*, CARTA*, int*, int*, int*, int*, int*, int*, TEMP_CARTA*, TEMP_CARTA*, int*,int*,INIMIGO*);
 void TransicaoTela(int, int*, int*, TELA*);
-void IniciarJogo(int*, int*, int*, int*,int*, TEMP_CARTA*, TEMP_CARTA*,CARTA*);
-int AtacarCarta(int, int, TEMP_CARTA*,TEMP_CARTA*, int*, int*,int*);
-void AtualizarPlacar(HUD*,int*);
+void IniciarJogo(int*, int*, int*, int*, int*, TEMP_CARTA*, TEMP_CARTA*, CARTA*, INIMIGO*, int*);
+int AtacarCarta(int, int, TEMP_CARTA*, TEMP_CARTA*, int*, int*, int*);
+void AtualizarPlacar(HUD*, int*);
 int ContaAlgarismos(int);
-void TrocarModo(int,TEMP_CARTA*);
-void AI(int*,int*,int*,CARTA*,TEMP_CARTA*,TEMP_CARTA*,int*);
+void TrocarModo(int, TEMP_CARTA*);
+void DarCartas(int,int*,INIMIGO*,int*,int*);
+void OrganizarMao(int*);
+void IniciarInimigos(INIMIGO*);
+void EmbaralharDecks(int*,INIMIGO*);
+void AI(int*, int*, int*, CARTA*, TEMP_CARTA*, TEMP_CARTA*, int*);
 
 
 
