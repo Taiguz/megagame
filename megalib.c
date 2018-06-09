@@ -88,7 +88,7 @@ void AI(int *mesa_aliada, int *mesa_inimiga, int *mao_inimiga, CARTA *carta, TEM
 
             if (mesa_aliada[n] != -1) { //tem carta do adversário na mesa
                 //se a carta estiver no modo ataque
-                if (temp_mesa_jogador[m].modo == 0) {
+                if (temp_mesa_inimigo[m].modo == 0) {
                     //verifica se vale a pena atacar ou colocar em modo defesa
                     if (temp_mesa_jogador[n].atk < temp_mesa_inimigo[m].atk && temp_mesa_jogador[n].modo != 1 ) {
 
@@ -102,21 +102,8 @@ void AI(int *mesa_aliada, int *mesa_inimiga, int *mao_inimiga, CARTA *carta, TEM
 
                     }
 
-                    //verifica se vale a pena atacar ou colocar em modo defesa
-                    if (temp_mesa_jogador[n].atk > temp_mesa_inimigo[n].atk && temp_mesa_jogador[n].modo != 1) {
-
-                        TrocarModo(m, temp_mesa_inimigo);
-                        //modo de defesa
-
-                    } else {
-
-                        vida[1] -= AtacarCarta(m, n, temp_mesa_inimigo, temp_mesa_jogador, mesa_inimiga, mesa_aliada, vida );
-
-                        //atacar carta que atende aos condicionais
-                    }
-
                     //verifica se vale a pena atacar a carta em modo defesa ou colocar em modo de defesa
-                    if (temp_mesa_jogador[n].def < temp_mesa_inimigo[n].atk && temp_mesa_jogador[n].modo != 0 ) {
+                    if (temp_mesa_jogador[n].def < temp_mesa_inimigo[m].atk && temp_mesa_jogador[n].modo != 0 ) {
 
                         vida[1] -= AtacarCarta(m, n, temp_mesa_inimigo, temp_mesa_jogador, mesa_inimiga, mesa_aliada, vida);
                         //atacar carta que atende aos condicionais
@@ -126,21 +113,9 @@ void AI(int *mesa_aliada, int *mesa_inimiga, int *mao_inimiga, CARTA *carta, TEM
                         TrocarModo(m, temp_mesa_inimigo);
                         //modo de defesa
                     }
-
-                    //verifica se vale a pena atacar a carta em modo defesa ou colocar em modo de defesa
-                    if (temp_mesa_jogador[n].def > temp_mesa_inimigo[n].atk && temp_mesa_jogador[n].modo != 0 ) {
-
-                        TrocarModo(m, temp_mesa_inimigo);
-                        //modo de defesa
-                    } else {
-
-                        vida[1] -= AtacarCarta(m, n, temp_mesa_inimigo, temp_mesa_jogador, mesa_inimiga, mesa_aliada, vida);
-                        //atacar carta que atende aos condicionais
-                    }
-
 
                 }
-                //se a carta estiver no modo ataque
+                //se a carta estiver no modo defesa
                 if (temp_mesa_inimigo[m].modo == 1) {
                     //verifica se vale a pena trocar a carta para o modo ataque
 
@@ -158,6 +133,7 @@ void AI(int *mesa_aliada, int *mesa_inimiga, int *mao_inimiga, CARTA *carta, TEM
             else {//atacar vida do adversário
 
             //existe uma função pra atacar a vida??
+            //pode tambem ser a função de passar a vez
 
             }
             */
