@@ -1,0 +1,14 @@
+
+
+	int vida_jogador = vida[0];
+	int vida_inimigo = vida[1];
+	
+ --- atacar pontos de vida
+
+ -- comeco e fim
+
+ --- bugs no menu
+
+-- logs
+
+-- save
