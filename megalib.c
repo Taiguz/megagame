@@ -21,15 +21,38 @@ void AI(int *mesa_aliada, int *mesa_inimiga, int *mao_inimiga, CARTA *carta, TEM
             //verifica as cartas que estao na mesa aliada e compara com uma das cartas que possui na mao
             if (carta[mao_inimiga[n]].atk > temp_mesa_jogador[m].atk) {
 
-
-
                 if (carta[mao_inimiga[n]].atk > temp_mesa_jogador[m].def) {
                     cont++;
 
                     break;
+                } else {
+
+                    continue;
+                }
+
+            } else if (carta[mao_inimiga[n]].atk > temp_mesa_jogador[m].atk) {
+
+                if (carta[mao_inimiga[n]].atk < temp_mesa_jogador[m].def) {
+                    cont++;
+
+                    break;
+                } else {
+
+                    continue;
                 }
 
             } else if (carta[mao_inimiga[n]].atk < temp_mesa_jogador[m].atk) {
+
+                if (carta[mao_inimiga[n]].def > temp_mesa_jogador[m].atk){
+                    cont++;
+
+                    break;
+                } else {
+
+                continue;
+                }
+            } else {
+
                 continue;
             }
         }
@@ -59,6 +82,7 @@ void AI(int *mesa_aliada, int *mesa_inimiga, int *mao_inimiga, CARTA *carta, TEM
             continue;
         }
     }
+
     for (int m = 0; m < 4; m++) {
         for (int n = 0; n < 4; n++) {
 
@@ -70,13 +94,11 @@ void AI(int *mesa_aliada, int *mesa_inimiga, int *mao_inimiga, CARTA *carta, TEM
 
                         vida[1] -= AtacarCarta(m, n, temp_mesa_inimigo, temp_mesa_jogador, mesa_inimiga, mesa_aliada, vida );
                         //atacar carta que atende aos condicionais
-                        // Com qual carta ?
 
                     } else {
 
                         TrocarModo(m, temp_mesa_inimigo);
                         //modo de defesa
-                        //Que carta ?
 
                     }
 
@@ -85,11 +107,11 @@ void AI(int *mesa_aliada, int *mesa_inimiga, int *mao_inimiga, CARTA *carta, TEM
 
                         TrocarModo(m, temp_mesa_inimigo);
                         //modo de defesa
-                        // Que carta ?
+
                     } else {
 
                         vida[1] -= AtacarCarta(m, n, temp_mesa_inimigo, temp_mesa_jogador, mesa_inimiga, mesa_aliada, vida );
-                        // Com que carta ?
+
                         //atacar carta que atende aos condicionais
                     }
 
@@ -134,6 +156,8 @@ void AI(int *mesa_aliada, int *mesa_inimiga, int *mao_inimiga, CARTA *carta, TEM
             }
             /*
             else {//atacar vida do adversário
+
+            //existe uma função pra atacar a vida??
 
             }
             */
@@ -2382,4 +2406,3 @@ void TrocarModo(int comand, TEMP_CARTA *temp_mesa) {
 
     }
 }
-
