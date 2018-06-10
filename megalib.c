@@ -12,157 +12,229 @@
 
 void AI(int *mesa_aliada, int *mesa_inimiga, int *mao_inimiga, CARTA *carta, TEMP_CARTA *temp_mesa_jogador, TEMP_CARTA *temp_mesa_inimigo, int *vida) {
 
-    int cont = 0;
-    int jogoucarta = 0;
-    //le as cartas que estao na mao
-    for (int n = 0; n < 4; n++) {
 
-        for (int m = 0; m < 4; m++) {
-            //verifica as cartas que estao na mesa aliada e compara com uma das cartas que possui na mao
-            if (carta[mao_inimiga[n]].atk > temp_mesa_jogador[m].atk) {
+    // FASE DE SUMMON
+    int ind = 0;
 
-                if (carta[mao_inimiga[n]].atk > temp_mesa_jogador[m].def) {
-                    cont++;
+    for (int i = 0; i < 5; i++) {
 
-                    break;
-                } else {
+        printf("minha mao -> %i \n", mao_inimiga[i] );
 
-                    continue;
-                }
-
-            } else if (carta[mao_inimiga[n]].atk > temp_mesa_jogador[m].atk) {
-
-                if (carta[mao_inimiga[n]].atk < temp_mesa_jogador[m].def) {
-                    cont++;
-
-                    break;
-                } else {
-
-                    continue;
-                }
-
-            } else if (carta[mao_inimiga[n]].atk < temp_mesa_jogador[m].atk) {
-
-                if (carta[mao_inimiga[n]].def > temp_mesa_jogador[m].atk){
-                    cont++;
-
-                    break;
-                } else {
-
-                continue;
-                }
-            } else {
-
-                continue;
+        if (carta[mao_inimiga[i]].atk > carta[mao_inimiga[ind]].atk) {
+            if (carta[mao_inimiga[i]].atk > carta[mao_inimiga[ind]].def) {
+                // Índice da carta com maior ataque e defesa na mão
+                ind = i;
             }
-        }
-        //se uma carta atender ao condicional, sumona as carta
-        if (cont > 0) {
 
+        } else if (carta[mao_inimiga[i]].atk < carta[mao_inimiga[ind]].atk) {
+            if (carta[mao_inimiga[i]].atk > carta[mao_inimiga[ind]].def) {
+                // Índice da carta com maior ataque em relacao a defesa na mão
+                ind = i;
+            }
 
-            SumonarCarta(0, n, mesa_inimiga, mao_inimiga, temp_mesa_inimigo, carta);
-            //sumonar carta que atende aos condicionais
-
-            jogoucarta = 1;
-
-        } else {
-            SumonarCarta(0, n, mesa_inimiga, mao_inimiga, temp_mesa_inimigo, carta);
-            //sumona uma carta em modo de defesa
-
-            jogoucarta = 1;
-        }
-
-        //se atender ao condicional, quebra o looping
-        if (jogoucarta == 1) {
-
-            break;
-            //se nao atender ao condicional. continua o looping para outra carta da mao
-        } else {
-
-            continue;
+        } else if (carta[mao_inimiga[i]].atk < carta[mao_inimiga[ind]].atk) {
+            if (carta[mao_inimiga[i]].def > carta[mao_inimiga[ind]].atk) {
+                // Índice da carta com maior defesa em relacao ao ataque na mão
+                ind = i;
+            }
         }
     }
 
-    int acao = 0;
+    // Sumona a carta com o maior ataque
+    SumonarCarta(0, (ind + 1), mesa_inimiga, mao_inimiga, temp_mesa_inimigo, carta);
 
-    for (int m = 0; m < 4; m++) {
-        for (int n = 0; n < 4; n++) {
+    // 0 - modo de ataque, 1- modo de defesa, ind - indice da carta a sumonar
 
-            if (mesa_aliada[n] != -1) { //tem carta do adversário na mesa
-                //se a carta estiver no modo ataque
-                do {
-                    if (temp_mesa_inimigo[m].modo == 0) {
-                        //verifica se vale a pena atacar ou colocar em modo defesa
-                        if (temp_mesa_jogador[n].atk < temp_mesa_inimigo[m].atk && temp_mesa_jogador[n].modo != 1 ) {
+    // FASE DE ATAQUE OU MUDANÇA DE MODO
 
-                            vida[1] -= AtacarCarta(m, n, temp_mesa_inimigo, temp_mesa_jogador, mesa_inimiga, mesa_aliada, vida );
-                            //atacar carta que atende aos condicionais
-                            acao = 1;
+    for (int i = 0; i < 5; i++) {
 
-                        } else {
+        if (mesa_inimiga[i] != -1) { // Se tiver carta na minha mesa
 
-                            TrocarModo(m, temp_mesa_inimigo);
-                            //modo de defesa
-                            acao = 1;
+            printf("checando carta %i\n", i );
+            //Checar se campo inimigo está vazio;
 
+            if (EstaVazio(mesa_aliada)) {
+
+                // Se estiver vazia, atacar pontos de vida, vida[0] - vida do jogador, i - indice da carta que vai atacar, temp_mesa_inimigo - struct que contem os atributos temporários
+                AtaqueDireto(vida, i, temp_mesa_inimigo);
+
+                printf("Atacando direto com %i", i);
+
+            } else {
+
+
+                //Quais meu ataque é maior que a defesa dela
+
+                int temp_def[5] = { 0, 0, 0, 0, 0};
+
+                // Quais estao eu tenho ataque maior
+
+                int temp_atk[5] = { 0, 0, 0, 0, 0};
+
+
+                //Checar quais eu tenho o ataque maior que a defesa
+                for (int ii = 0; ii < 5; ii++) {
+
+                    if (mesa_aliada[ii] != -1) {
+
+                        if (temp_mesa_jogador[ii].modo == 1) { // Está em modo de defesa
+
+                            if (temp_mesa_inimigo[ii].atk > temp_mesa_jogador[ii].def) { // Tenho o ataque maior
+
+                                temp_def[ii] = 1;
+                            }
                         }
-
-                        //verifica se vale a pena atacar a carta em modo defesa ou colocar em modo de defesa
-                        if (temp_mesa_jogador[n].def < temp_mesa_inimigo[m].atk && temp_mesa_jogador[n].modo != 0 ) {
-
-                            vida[1] -= AtacarCarta(m, n, temp_mesa_inimigo, temp_mesa_jogador, mesa_inimiga, mesa_aliada, vida);
-                            //atacar carta que atende aos condicionais
-                            acao = 1;
-
-
-                        } else {
-
-                            TrocarModo(m, temp_mesa_inimigo);
-                            //modo de defesa
-                            acao = 1;
-
-                        }
-
                     }
-                    //se a carta estiver no modo defesa
-                    if (temp_mesa_inimigo[m].modo == 1) {
-                        //verifica se vale a pena trocar a carta para o modo ataque
 
-                        if (temp_mesa_jogador[n].atk < temp_mesa_inimigo[m].atk && temp_mesa_jogador[n].modo != 1 ) {
+                }
 
-                            if (temp_mesa_jogador[n].def < temp_mesa_inimigo[m].atk) {
-                                TrocarModo(m, temp_mesa_inimigo);
-                                //modo de ataque
-                                acao = 1;
+                //Checar quais em tenho o ataque maior que o ataque dela
+                for (int ii = 0; ii < 5; ii++) {
 
+                    if (mesa_aliada[ii] != -1) {
+
+                        printf("a carta %i existe !\n", ii );
+                        if (temp_mesa_jogador[ii].modo == 0) {//Está em modo de ataque
+
+
+
+                            if (temp_mesa_inimigo[ii].atk > temp_mesa_jogador[ii].atk) {// Tenho o ataque maior
+                                printf("tenho o ataque maios que a -> %i\n", ii );
+                                printf(" ataque -> %i\n", temp_mesa_jogador[ii].atk );
+                                temp_atk[ii] = 1;
                             }
                         }
 
-                        if (temp_mesa_jogador[n].def < temp_mesa_inimigo[m].atk && temp_mesa_jogador[n].modo != 1 ) {
+                    }
 
-                                TrocarModo(m, temp_mesa_inimigo);
-                                //modo de ataque
-                                acao = 1;
+                }
+
+                int count = 0;
+
+                for (int ii = 0; ii < 5; ii++) { // Checar se existe carta que eu tenho o ataque maior
+
+                    if (temp_atk[ii] == 1) {
+
+                        count++;
+                    }
+                }
+
+                if (count > 0) { // Se existir
+
+
+                    // Checar se minha carta está em modo de ataque
+
+                    if (temp_mesa_inimigo[i].modo != 0) {
+                        //Trocar modo
+                        TrocarModo((i + 1), temp_mesa_inimigo); // (i+1) - indice da carta +1
+                    }
+
+                    // Ver dentre as que eu tenho ataque maior qual tem o maior ataque
+
+                    int ind2 = 0;
+                    for (int ii = 0; ii < 5; ii++) {
+
+                        if (temp_atk[ii] == 1) {
+
+                            if (ind2 == 0) {
+
+                                ind2 = ii;
+
+                            } else {
+
+                                if (temp_mesa_jogador[ii].atk > temp_mesa_jogador[ind2].atk ) {
+
+                                    ind2 = ii;
+
+                                }
+
+                            }
+
+                        }
+
+                    }
+
+                    // Atacar a carta que tem o maior ataque
+
+                    printf("atacando carta %i com %i \n", ind2, i );
+
+
+
+                    *(vida + 1) -= AtacarCarta((i + 1), (ind2 + 1), temp_mesa_inimigo, temp_mesa_jogador, mesa_inimiga, mesa_aliada, vida );
+
+
+                } else {// Se não existir
+
+                    int count2 = 0;
+                    for (int ii = 0; ii < 5; ii++) { // Checar se existe carta que eu tenho o ataque maior que a defesa
+
+                        if (temp_def[ii] == 1) {
+
+                            count2++;
                         }
                     }
 
-                } while (acao == 0);
+                    if (count2 > 0) { // Se existir
+                        printf("existe cartas que tenho o atque maior que a defesa");
+                        if (temp_mesa_inimigo[i].modo != 0) {// Checar se minha carta está em modo de ataque
+                            //Trocar modo
+                            TrocarModo((i + 1), temp_mesa_inimigo); // (i+1) - indice da carta +1
+                        }
 
-                if (acao == 1) {
-                    //passar a vez
+
+                        // Ver dentre as que eu tenho ataque maior qual tem a maior defesa
+
+                        int ind2 = 0;
+                        for (int ii = 0; ii < 5; ii++) {
+
+                            if (temp_def[ii] == 1) {
+
+                                if (ind2 == 0) {
+
+                                    ind2 = ii;
+                                } else {
+
+                                    if (temp_mesa_jogador[ii].def > temp_mesa_jogador[ind2].def ) {
+
+                                        ind2 = ii;
+
+                                    }
+
+                                }
+
+                            }
+
+                        }
+
+                        // Atacar a carta que tem a maior defesa
+
+                        *(vida + 1) -= AtacarCarta((i + 1), (ind2 + 1), temp_mesa_inimigo, temp_mesa_jogador, mesa_inimiga, mesa_aliada, vida );
+
+                    } else { // Se não existir
+
+                        //Colocar em modo de defesa
+
+                        if (temp_mesa_inimigo[i].modo != 1) {// Checar se minha carta está em modo de defesa
+                            //Trocar modo
+                            TrocarModo((i + 1), temp_mesa_inimigo); // (i+1) - indice da carta +1
+                        }
+
+
+                    }
+
+
                 }
 
-            }
-            /*
-            else {//atacar vida do adversário
-
-            //existe uma função pra atacar a vida??
-            //pode tambem ser a função de passar a vez
 
             }
-            */
+
+
         }
+
+
     }
+
 }
 
 // Criando função responsável por receber comandos "in-game" (digitados no console).
