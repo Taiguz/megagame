@@ -76,12 +76,11 @@ void AI(int *mesa_aliada, int *mesa_inimiga, int *mao_inimiga, CARTA *carta, TEM
                 //Checar quais eu tenho o ataque maior que a defesa
                 for (int ii = 0; ii < 5; ii++) {
 
-                    if (mesa_aliada[ii] != -1) {
+                    if (mesa_aliada[ii] != -1) { // Se tiver carta na mesa do jogador
 
                         if (temp_mesa_jogador[ii].modo == 1) { // Está em modo de defesa
 
                             if (temp_mesa_inimigo[ii].atk > temp_mesa_jogador[ii].def) { // Tenho o ataque maior
-
                                 temp_def[ii] = 1;
                             }
                         }
@@ -89,21 +88,21 @@ void AI(int *mesa_aliada, int *mesa_inimiga, int *mao_inimiga, CARTA *carta, TEM
 
                 }
 
-                //Checar quais em tenho o ataque maior que o ataque dela
+                //Checar quais eu tenho o ataque maior que o ataque dela
                 for (int ii = 0; ii < 5; ii++) {
 
-                    if (mesa_aliada[ii] != -1) {
+                    if (mesa_aliada[ii] != -1) { // Se tiver carta na mesa do jogador
 
                         printf("a carta %i existe !\n", ii );
+
                         if (temp_mesa_jogador[ii].modo == 0) {//Está em modo de ataque
 
-
-
                             if (temp_mesa_inimigo[ii].atk > temp_mesa_jogador[ii].atk) {// Tenho o ataque maior
-                                printf("tenho o ataque maios que a -> %i\n", ii );
+                                printf("tenho o ataque maior que a -> %i\n", ii );
                                 printf(" ataque -> %i\n", temp_mesa_jogador[ii].atk );
                                 temp_atk[ii] = 1;
                             }
+
                         }
 
                     }
@@ -114,7 +113,7 @@ void AI(int *mesa_aliada, int *mesa_inimiga, int *mao_inimiga, CARTA *carta, TEM
 
                 for (int ii = 0; ii < 5; ii++) { // Checar se existe carta que eu tenho o ataque maior
 
-                    if (temp_atk[ii] == 1) {
+                    if (temp_atk[ii] == 1) { //verificando qual carta tem valor 1, que é a com maior ataque
 
                         count++;
                     }
@@ -122,9 +121,7 @@ void AI(int *mesa_aliada, int *mesa_inimiga, int *mao_inimiga, CARTA *carta, TEM
 
                 if (count > 0) { // Se existir
 
-
                     // Checar se minha carta está em modo de ataque
-
                     if (temp_mesa_inimigo[i].modo != 0) {
                         //Trocar modo
                         TrocarModo((i + 1), temp_mesa_inimigo); // (i+1) - indice da carta +1
@@ -144,9 +141,7 @@ void AI(int *mesa_aliada, int *mesa_inimiga, int *mao_inimiga, CARTA *carta, TEM
                             } else {
 
                                 if (temp_mesa_jogador[ii].atk > temp_mesa_jogador[ind2].atk ) {
-
                                     ind2 = ii;
-
                                 }
 
                             }
@@ -156,10 +151,7 @@ void AI(int *mesa_aliada, int *mesa_inimiga, int *mao_inimiga, CARTA *carta, TEM
                     }
 
                     // Atacar a carta que tem o maior ataque
-
                     printf("atacando carta %i com %i \n", ind2, i );
-
-
 
                     *(vida + 1) -= AtacarCarta((i + 1), (ind2 + 1), temp_mesa_inimigo, temp_mesa_jogador, mesa_inimiga, mesa_aliada, vida );
 
@@ -176,7 +168,7 @@ void AI(int *mesa_aliada, int *mesa_inimiga, int *mao_inimiga, CARTA *carta, TEM
                     }
 
                     if (count2 > 0) { // Se existir
-                        printf("existe cartas que tenho o atque maior que a defesa");
+                        printf("existe cartas que tenho o ataque maior que a defesa");
                         if (temp_mesa_inimigo[i].modo != 0) {// Checar se minha carta está em modo de ataque
                             //Trocar modo
                             TrocarModo((i + 1), temp_mesa_inimigo); // (i+1) - indice da carta +1
@@ -234,6 +226,9 @@ void AI(int *mesa_aliada, int *mesa_inimiga, int *mao_inimiga, CARTA *carta, TEM
 
 
     }
+
+    //FUNÇÃO PASSA A VEZ
+    PassarVez(hud, vida, deck_jogador, mao_jogador, mesa_aliada, mesa_inimiga, mao_inimiga, cartas, temp_mesa_jogador, temp_mesa_inimigo, inimigos, menu, entrada, tela_num, atgame);
 
 }
 
