@@ -83,49 +83,73 @@ void AI(int *mesa_aliada, int *mesa_inimiga, int *mao_inimiga, CARTA *carta, TEM
         }
     }
 
+    int acao = 0;
+
     for (int m = 0; m < 4; m++) {
         for (int n = 0; n < 4; n++) {
 
             if (mesa_aliada[n] != -1) { //tem carta do adversário na mesa
                 //se a carta estiver no modo ataque
-                if (temp_mesa_inimigo[m].modo == 0) {
-                    //verifica se vale a pena atacar ou colocar em modo defesa
-                    if (temp_mesa_jogador[n].atk < temp_mesa_inimigo[m].atk && temp_mesa_jogador[n].modo != 1 ) {
+                do {
+                    if (temp_mesa_inimigo[m].modo == 0) {
+                        //verifica se vale a pena atacar ou colocar em modo defesa
+                        if (temp_mesa_jogador[n].atk < temp_mesa_inimigo[m].atk && temp_mesa_jogador[n].modo != 1 ) {
 
-                        vida[1] -= AtacarCarta(m, n, temp_mesa_inimigo, temp_mesa_jogador, mesa_inimiga, mesa_aliada, vida );
-                        //atacar carta que atende aos condicionais
+                            vida[1] -= AtacarCarta(m, n, temp_mesa_inimigo, temp_mesa_jogador, mesa_inimiga, mesa_aliada, vida );
+                            //atacar carta que atende aos condicionais
+                            acao = 1;
 
-                    } else {
+                        } else {
 
-                        TrocarModo(m, temp_mesa_inimigo);
-                        //modo de defesa
-
-                    }
-
-                    //verifica se vale a pena atacar a carta em modo defesa ou colocar em modo de defesa
-                    if (temp_mesa_jogador[n].def < temp_mesa_inimigo[m].atk && temp_mesa_jogador[n].modo != 0 ) {
-
-                        vida[1] -= AtacarCarta(m, n, temp_mesa_inimigo, temp_mesa_jogador, mesa_inimiga, mesa_aliada, vida);
-                        //atacar carta que atende aos condicionais
-
-                    } else {
-
-                        TrocarModo(m, temp_mesa_inimigo);
-                        //modo de defesa
-                    }
-
-                }
-                //se a carta estiver no modo defesa
-                if (temp_mesa_inimigo[m].modo == 1) {
-                    //verifica se vale a pena trocar a carta para o modo ataque
-
-                    if (temp_mesa_jogador[n].atk < temp_mesa_inimigo[m].atk && temp_mesa_jogador[n].modo != 1 ) {
-
-                        if (temp_mesa_jogador[n].def < temp_mesa_inimigo[m].atk) {
                             TrocarModo(m, temp_mesa_inimigo);
-                            //modo de ataque
+                            //modo de defesa
+                            acao = 1;
+
+                        }
+
+                        //verifica se vale a pena atacar a carta em modo defesa ou colocar em modo de defesa
+                        if (temp_mesa_jogador[n].def < temp_mesa_inimigo[m].atk && temp_mesa_jogador[n].modo != 0 ) {
+
+                            vida[1] -= AtacarCarta(m, n, temp_mesa_inimigo, temp_mesa_jogador, mesa_inimiga, mesa_aliada, vida);
+                            //atacar carta que atende aos condicionais
+                            acao = 1;
+
+
+                        } else {
+
+                            TrocarModo(m, temp_mesa_inimigo);
+                            //modo de defesa
+                            acao = 1;
+
+                        }
+
+                    }
+                    //se a carta estiver no modo defesa
+                    if (temp_mesa_inimigo[m].modo == 1) {
+                        //verifica se vale a pena trocar a carta para o modo ataque
+
+                        if (temp_mesa_jogador[n].atk < temp_mesa_inimigo[m].atk && temp_mesa_jogador[n].modo != 1 ) {
+
+                            if (temp_mesa_jogador[n].def < temp_mesa_inimigo[m].atk) {
+                                TrocarModo(m, temp_mesa_inimigo);
+                                //modo de ataque
+                                acao = 1;
+
+                            }
+                        }
+
+                        if (temp_mesa_jogador[n].def < temp_mesa_inimigo[m].atk && temp_mesa_jogador[n].modo != 1 ) {
+
+                                TrocarModo(m, temp_mesa_inimigo);
+                                //modo de ataque
+                                acao = 1;
                         }
                     }
+
+                } while (acao == 0);
+
+                if (acao == 1) {
+                    //passar a vez
                 }
 
             }
