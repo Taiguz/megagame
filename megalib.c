@@ -224,10 +224,6 @@ void AI(int *mesa_aliada, int *mesa_inimiga, int *mao_inimiga, CARTA *carta, TEM
 
 
     }
-
-    //FUNÇÃO PASSA A VEZ, FIM DA JOGADA DO AI
-    PassarVez(hud, vida, deck_jogador, mao_jogador, mesa_aliada, mesa_inimiga, mao_inimiga, cartas, temp_mesa_jogador, temp_mesa_inimigo, inimigos, menu, entrada, tela_num, atgame);
-
 }
 
 // Criando função responsável por receber comandos "in-game" (digitados no console).
