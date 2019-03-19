@@ -1,7 +1,5 @@
-# megagame
+# MegaGame
 
-# Bugs Conhecidos
-# 
-# Menu dando opção para atacar mesmo sem ter cartas em campo.
-# O que fazer quando não houver mais cartas no baralho ? Linha 1388
-just a repository
+# Um jogo de cartas de batlha no estilo yu gi oh, feito em c
+  
+Repositório para armazenar o projeto da disciplina de algoritmos 2
